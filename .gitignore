@@ -1,0 +1,14 @@
+# Obsidian user config (per-device settings, not vault content)
+.obsidian/
+
+# Claude Code session data
+.claude/plans/
+.claude/teams/
+.claude/tasks/
+.claude/file-history/
+.claude/session-env/
+.claude/backups/
+.claude/projects/
+
+# OS files
+.DS_Store

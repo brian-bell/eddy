@@ -1,0 +1,66 @@
+# Work Stream Format
+
+Work streams are defined as individual markdown files in `notes/workstreams/`. Each represents a coherent body of work (like an epic or initiative).
+
+## Template
+
+```markdown
+---
+status: active
+repos: [repo1, repo2]
+jira_epic: PROJ-1234
+description: "Brief one-line description"
+---
+
+# Work Stream Name
+
+## Description
+Longer description of what this work stream encompasses and its goals.
+
+## Related
+- Repos: [[repo1]], [[repo2]]
+- Jira Epic: [[PROJ-1234]]
+- PRs: <!-- links added as PRs are created -->
+
+## Tasks
+<!-- Links to task folders and coding sessions -->
+
+## Notes
+<!-- Links to relevant squawk items, decisions, context -->
+```
+
+## Reading Work Streams
+
+To load active work streams, read all `.md` files in `notes/workstreams/`. Parse the YAML frontmatter to get:
+- `status` — filter for `active` streams when matching tasks
+- `repos` — list of related repository names (matching entries in `repos.md`)
+- `jira_epic` — associated Jira epic key
+- `description` — for semantic matching when categorizing tasks
+
+## Matching Tasks to Work Streams
+
+When a new task needs to be categorized:
+1. Read all active work streams
+2. Compare the task description against work stream descriptions, repos, and Jira epics
+3. Present the best match(es) to the user
+4. If no good match, suggest creating a new work stream (but NEVER create without user confirmation)
+
+## Todo Files
+
+Each work stream has a corresponding todo file at `notes/todos/<work-stream-name>.md`:
+
+```markdown
+---
+work_stream: Work Stream Name
+---
+
+# Work Stream Name — Todos
+
+- [ ] Task description [[link-to-related-note]] — added YYYY-MM-DD
+- [x] Completed task description — completed YYYY-MM-DD
+```
+
+When adding a todo, always include:
+- A clear task description
+- Wikilinks to related notes (squawk items, PRs, Jira tickets)
+- The date it was added
