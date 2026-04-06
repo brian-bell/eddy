@@ -31,3 +31,33 @@ When a skill needs a config value:
 2. Find the relevant section
 3. Extract the value after `**Key:**`
 4. If the value is a comment placeholder (`<!-- ... -->`), treat it as unconfigured and ask the user to set it up
+
+## GitHub Username Resolution
+
+When a skill needs the GitHub username, follow this fallback chain in order:
+
+### Step 1: Read config.md
+
+Read the GitHub → Username value from `config.md`. If it contains a real value (not a `<!-- ... -->` placeholder), use it. Done.
+
+### Step 2: Detect via `gh api user`
+
+Run `gh api user` and extract the `.login` field. This is the GitHub login, not the display name.
+
+If successful:
+- Use the detected username
+- Write it back to `config.md`, replacing the placeholder on the `- **Username:**` line in the GitHub section
+- Proceed with the skill
+
+If `gh` is not installed, not authenticated, or the call fails for any reason (network error, rate limit, etc.), silently fall through to Step 3. Do not show an error about `gh`.
+
+> **Note:** This is the one exception to the "always use the GitHub MCP plugin tools, not the `gh` CLI" rule. The `gh` CLI is used here only for username detection — never for PR queries or other GitHub API calls.
+
+### Step 3: Ask the user
+
+Prompt the user for their GitHub username. To help them, check `git config user.name` and include it as a hint — but since this returns a display name (e.g., "Brian Bell"), not a login (e.g., "brianbell"), never auto-accept it. The user must confirm or type their actual login.
+
+If the user provides a username:
+- Use it
+- Write it back to `config.md`, replacing the placeholder
+- Proceed with the skill

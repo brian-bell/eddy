@@ -11,8 +11,7 @@ Show PRs that need your review attention — requested reviews and mentions.
 
 ### 1. Get GitHub Username
 
-Read `config.md` (per `config-format.md`) for the GitHub username.
-If unconfigured, ask the user.
+Resolve the GitHub username using the fallback chain defined in `config-format.md` (GitHub Username Resolution).
 
 ### 2. Fetch PRs Awaiting Review
 
