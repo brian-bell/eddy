@@ -1,6 +1,6 @@
 # Productivity Workflow Hub
 
-This repo is a personal command center for daily work. It combines an Obsidian knowledge vault with Claude Code skills to manage tasks, PRs, Jira tickets, and incoming information.
+This repo is a personal command center for daily work. It combines an Obsidian knowledge vault with workflow skills that should work with Claude Code or Codex to manage tasks, PRs, Jira tickets, and incoming information.
 
 ## Skills
 

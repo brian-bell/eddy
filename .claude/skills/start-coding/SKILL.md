@@ -1,6 +1,6 @@
 ---
 name: start-coding
-description: Clone repos into a task folder with full scaffolding - CLAUDE.md, todos, daily log, work stream links
+description: Clone repos into a task folder with full scaffolding - CLAUDE.md, AGENTS.md symlink, todos, daily log, work stream links
 ---
 
 # Start Coding
@@ -45,7 +45,7 @@ Read the dev directory from `config.md` (default: `~/dev`).
    git clone <repo-url> <dev-dir>/<task-name>/<repo-name>
    ```
 
-### 5. Create Task CLAUDE.md
+### 5. Create Task Context Files
 
 Create `<dev-dir>/<task-name>/CLAUDE.md` with content that gives Claude full context when working in this folder:
 
@@ -70,6 +70,14 @@ Part of: <work stream name>
 - Todos: `<workflow-repo>/notes/todos/<stream>.md`
 - Daily log: `<workflow-repo>/notes/daily/`
 ```
+
+Then create a symlink so Codex sees the same task context:
+
+```sh
+ln -s CLAUDE.md <dev-dir>/<task-name>/AGENTS.md
+```
+
+If `AGENTS.md` already exists and is not a symlink to `CLAUDE.md`, ask the user before replacing it.
 
 ### 6. Update Vault
 
@@ -97,9 +105,9 @@ Append to `notes/daily/YYYY-MM-DD.md`:
 
 Tell the user:
 - Task folder location and what was cloned
-- The CLAUDE.md created with context
+- The `CLAUDE.md` created with context and the `AGENTS.md` symlink pointing to it
 - Vault updates (todo, work stream, daily log)
-- How to start working: `cd <task-folder>` and launch Claude Code
+- How to start working: `cd <task-folder>` and launch Claude Code or Codex
 
 ## Important Rules
 
@@ -107,4 +115,5 @@ Tell the user:
 - **Always confirm the task folder name before creating it**
 - Follow work stream sovereignty — never create work streams without confirmation
 - Use absolute paths in the task CLAUDE.md so it works regardless of where Claude Code is launched
+- Create `AGENTS.md` as a symlink to `CLAUDE.md` so Claude Code and Codex share one source of truth
 - If a repo URL is missing from repos.md, ask the user for it

@@ -85,7 +85,7 @@ Calculate available focus time from the calendar. Then propose a prioritized pla
 
 Ask the user:
 - "Does this plan look right? Want to reorder, defer, or add anything?"
-- Use AskUserQuestion for structured input if helpful
+- Use structured questions where appropriate
 - Iterate until the user is satisfied
 
 ### 6. Write to Daily Log
