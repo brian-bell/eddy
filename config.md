@@ -1,7 +1,7 @@
 # Configuration
 
 ## GitHub
-- **Username:** <!-- your GitHub username -->
+- **Username:** <!-- auto-detected from gh cli, or set manually -->
 
 ## Jira
 - **Username:** <!-- your Jira username -->

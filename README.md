@@ -16,7 +16,7 @@ A personal command center powered by [Claude Code](https://docs.anthropic.com/en
    cd ~/dev/new-primary-workflow
    ```
 
-2. **Fill in your config** — edit `config.md` with your GitHub username, Jira credentials, and preferences.
+2. **Fill in your config** — edit `config.md` with your Jira credentials and preferences. Your GitHub username is auto-detected from `gh` if authenticated; you can also set it manually in `config.md`.
 
 3. **Add your repositories** — edit `repos.md` with the repos you work on (name, URL, description, tags). Or run `/architecture` to do this interactively.
 

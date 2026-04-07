@@ -11,8 +11,7 @@ Fetch and display your authored PRs with compact status. Parse review feedback i
 
 ### 1. Get GitHub Username
 
-Read `config.md` (per `config-format.md`) for the GitHub username.
-If unconfigured, ask the user.
+Resolve the GitHub username using the fallback chain defined in `config-format.md` (GitHub Username Resolution).
 
 ### 2. Fetch PRs
 
