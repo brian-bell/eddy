@@ -1,10 +1,11 @@
 # Productivity Workflow Hub
 
-A personal command center powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Obsidian](https://obsidian.md). Manage tasks, PRs, Jira tickets, and incoming information from a single repo with 10 slash-command skills.
+A personal command center powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code), Codex, and [Obsidian](https://obsidian.md). Manage tasks, PRs, Jira tickets, and incoming information from a single repo with 10 reusable workflow skills.
 
 ## Prerequisites
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the **GitHub plugin** enabled
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or Codex
+- GitHub access through MCP/plugin integration if available, or the `gh` CLI as a fallback for PR workflows
 - [Obsidian](https://obsidian.md) (for browsing the knowledge graph)
 - [acli](https://bobswift.atlassian.net/wiki/spaces/ACLI/overview) (optional, for Jira integration)
 
@@ -22,9 +23,11 @@ A personal command center powered by [Claude Code](https://docs.anthropic.com/en
 
 4. **Open the vault in Obsidian** — open the `notes/` folder as an Obsidian vault to browse the knowledge graph.
 
-5. **Start Claude Code** in the repo folder and you're ready to go:
+5. **Start Claude Code or Codex** in the repo folder and you're ready to go:
    ```sh
    claude
+   # or
+   codex
    ```
 
 ## Skills
@@ -42,10 +45,28 @@ A personal command center powered by [Claude Code](https://docs.anthropic.com/en
 | `/whats-next` | Prioritized list of what to work on next |
 | `/architecture` | Build/update the system architecture doc via interview |
 
+## Codex Skills
+
+Codex discovers installed skills from `~/.agents/skills`, not from this repo directly. The source of truth for these skills lives in `.claude/skills/`.
+
+Install or refresh the Codex skill links with:
+
+```sh
+./scripts/install-codex-skills.sh
+```
+
+If you need to replace conflicting symlinks in `~/.agents/skills`, run:
+
+```sh
+./scripts/install-codex-skills.sh --force
+```
+
+Start a fresh Codex session after installing or updating these links.
+
 ## How It Works
 
 - **Obsidian vault** (`notes/`) stores everything as markdown with YAML frontmatter, `[[wikilinks]]`, and `#tags`
-- **Skills** read and write vault notes following shared conventions in `.claude/skills/`
+- **Skills** are authored in `.claude/skills/`; for Codex, install them into `~/.agents/skills` with `./scripts/install-codex-skills.sh`
 - **Daily log** (`notes/daily/`) is the spine — every skill appends activity entries
 - **Work streams** (`notes/workstreams/`) organize tasks into coherent bodies of work
 - **Squawk** (`notes/squawk/`) captures ingested info from any source

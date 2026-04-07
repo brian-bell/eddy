@@ -15,13 +15,13 @@ Resolve the GitHub username using the fallback chain defined in `config-format.m
 
 ### 2. Fetch PRs Awaiting Review
 
-Use the GitHub MCP plugin tools:
+Use the GitHub access available in the environment. Prefer GitHub MCP/plugin tools when available, otherwise use `gh`.
 
 **Requested reviews:**
-- Use `mcp__plugin_github_github__search_pull_requests` with query `is:open is:pr review-requested:<username>`
+- Search for open PRs with `review-requested:<username>`
 
 **Mentions:**
-- Use `mcp__plugin_github_github__search_pull_requests` with query `is:open is:pr mentions:<username> -author:<username>`
+- Search for open PRs with `mentions:<username> -author:<username>`
 
 For each PR, fetch basic details:
 - Title, repo, author
@@ -53,7 +53,7 @@ Sort within each group by age (oldest first — most urgent).
 ### 4. Engage with a PR
 
 If the user wants to dig into a specific PR:
-1. Fetch full PR details using `mcp__plugin_github_github__pull_request_read`
+1. Fetch full PR details using GitHub MCP/plugin tools or `gh pr view`
 2. Show: description, key files changed, existing review comments
 3. Create a lightweight vault note at `notes/prs/<repo>-<number>.md` with frontmatter
 4. Ask if the user wants to start reviewing (open in browser, add comments, etc.)
@@ -69,7 +69,7 @@ Append to `notes/daily/YYYY-MM-DD.md`:
 
 ## Important Rules
 
-- Always use the GitHub MCP plugin tools, not the `gh` CLI
+- Prefer GitHub MCP/plugin tools when available, but fall back to `gh` when needed
 - Don't create vault notes for every listed PR — only when the user engages
 - Exclude the user's own PRs from the mentions list (filter `-author:<username>`)
 - Sort by urgency: oldest review requests first

@@ -23,7 +23,7 @@ Read:
 
 ### 3. Interview
 
-Conduct a multi-turn interview using AskUserQuestion. Ask questions one at a time, building on previous answers.
+Conduct a multi-turn interview. Ask questions one at a time, building on previous answers. Use structured questions where appropriate.
 
 #### For a new architecture doc:
 

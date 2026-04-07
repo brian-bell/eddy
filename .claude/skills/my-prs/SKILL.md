@@ -15,9 +15,10 @@ Resolve the GitHub username using the fallback chain defined in `config-format.m
 
 ### 2. Fetch PRs
 
-Use the GitHub MCP plugin tools to fetch open PRs authored by the user:
-- Use `mcp__plugin_github_github__search_pull_requests` with query `is:open is:pr author:<username>`
-- For each PR, use `mcp__plugin_github_github__pull_request_read` to get full details including:
+Use the GitHub access available in the environment to fetch open PRs authored by the user:
+- Prefer GitHub MCP/plugin search and read tools if they are available
+- Otherwise use `gh` commands such as `gh search prs --author "<username>" --state open` and `gh pr view`
+- For each PR, fetch full details including:
   - Check/CI status
   - Review comments and review status
   - Merge conflict status
@@ -97,7 +98,7 @@ Append to `notes/daily/YYYY-MM-DD.md`:
 
 ## Important Rules
 
-- Always use the GitHub MCP plugin tools, not the `gh` CLI
+- Prefer GitHub MCP/plugin tools when available, but fall back to `gh` when needed
 - Create vault notes only for PRs with review feedback (not every open PR)
 - When updating existing PR vault notes, preserve manually added content — only update the Status section and add new review comments
 - Match work streams by checking if the PR's repo appears in any work stream's `repos` frontmatter field
