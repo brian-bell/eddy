@@ -34,6 +34,10 @@ Check if the user specified "daily" or "weekly" in their message. Default to "da
 **Squawk Items:**
 - Read files in `notes/squawk/` created today (match `date:` frontmatter)
 
+**Ideas Captured:**
+- Read files in `notes/ideas/` created today (match `date:` frontmatter)
+- Note: title and related streams for each
+
 **Jira Changes:**
 - Read files in `notes/jira/` modified today — status changes
 
@@ -68,6 +72,7 @@ type: daily/weekly
 - Created task "Fix auth timeout" in [[Error Handling Overhaul]]
 - Ingested 3 items: 2 Slack, 1 email
 - Opened PR backflow#155
+- Captured 2 ideas: [[2026-04-06-cli-dashboard]], [[2026-04-06-api-caching]]
 
 ## Blockers
 - PR backflow#150 has merge conflicts
