@@ -12,8 +12,9 @@ Manage Jira tickets via the Atlassian CLI (`acli`). Find tickets, create new one
 ### 1. Check Prerequisites
 
 Run `which acli` to verify acli is installed. If not found, tell the user:
-> `acli` (Atlassian CLI) is not installed. Install it and configure authentication before using this skill.
-> See: https://bobswift.atlassian.net/wiki/spaces/ACLI/overview
+> The `/jira` skill requires the Atlassian CLI (`acli`). This is an optional integration — Eddy works fine without it.
+>
+> To set it up: install [acli](https://bobswift.atlassian.net/wiki/spaces/ACLI/overview) and add your Jira credentials to the "Optional Integrations" section in `config.md`.
 
 Then stop.
 
