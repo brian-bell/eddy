@@ -86,12 +86,34 @@ Group by category and present the top items:
    Why: To Do, unassigned but in your epic
 ```
 
-### 4. Offer Actions
+### 4. Surface Relevant Ideas (optional)
+
+After generating the ranked list, check if any ideas relate to the surfaced work:
+
+1. Read all files in `notes/ideas/` — parse frontmatter for `related_streams` and `tags`
+2. Collect the work streams that appeared in the ranked items above
+3. Find ideas whose `related_streams` overlap with those active work streams
+4. If relevant ideas exist, append an **Idea Sparks** section at the bottom:
+
+```
+### Idea Sparks
+- [[2026-04-06-cli-dashboard]] — "CLI dashboard for vault stats" (related to [[Error Handling Overhaul]])
+- [[2026-04-05-api-caching]] — "Add API response caching" (related to [[Backend Performance]])
+```
+
+**Rules for this section:**
+- Only show if ideas are naturally relevant to the work streams already surfaced — never force it
+- Ideas are NOT scored or ranked — just listed as context
+- This section goes AFTER all prioritized items (after "On the Radar")
+- If no ideas are relevant, do not show this section at all
+- Keep it brief — title and related stream link, nothing more
+
+### 5. Offer Actions
 
 After presenting the list, ask:
 - "Want to start on any of these? I can help with PR feedback, task setup, or Jira updates."
 
-### 5. Update Daily Log
+### 6. Update Daily Log
 
 Append to `notes/daily/YYYY-MM-DD.md`:
 ```

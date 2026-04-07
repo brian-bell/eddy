@@ -55,6 +55,7 @@ Use these prefixes in brackets:
 | `daily-plan` | /daily-plan |
 | `recap` | /recap |
 | `architecture` | /architecture |
+| `idea` | /idea |
 
 ## Creating the Daily Log
 

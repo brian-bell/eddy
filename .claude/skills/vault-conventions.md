@@ -25,6 +25,7 @@ These fields are used across note types. Only include fields relevant to the not
 | `work_stream` | string | Name of the related work stream (must match a file in `notes/workstreams/`) |
 | `source` | string | Origin of the content (slack, email, meeting, etc.) — squawk notes only |
 | `category` | string | Inferred category (no fixed list, infer from content) |
+| `related_streams` | list | Work streams related to the note (soft link, idea notes only) |
 | `actionable` | boolean | Whether the note contains action items |
 | `status` | string | Current status (e.g., open, in_progress, closed, changes_requested) |
 | `repo` | string | Related repository name (must match an entry in `repos.md`) |
@@ -65,6 +66,7 @@ Every skill that creates or modifies vault data MUST append a summary entry to t
 
 - Daily logs: `YYYY-MM-DD.md`
 - Squawk notes: `YYYY-MM-DD-<short-slug>.md` (e.g., `2026-04-04-auth-error-discussion.md`)
+- Idea notes: `YYYY-MM-DD-<short-slug>.md` (e.g., `2026-04-06-cli-dashboard.md`)
 - PR notes: `<repo>-<number>.md` (e.g., `backflow-142.md`)
 - Jira notes: `<TICKET-KEY>.md` (e.g., `BACK-1234.md`)
 - Work streams: `<work-stream-name>.md` (e.g., `error-handling-overhaul.md`)
