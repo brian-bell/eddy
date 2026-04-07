@@ -20,7 +20,7 @@ This repo is a personal command center for daily work. It combines an Obsidian k
 
 ## Key Files
 
-- `config.md` — GitHub username, Jira settings, preferences
+- `config.md` — GitHub username (auto-detected), Jira settings, preferences
 - `repos.md` — Registry of all git repositories with descriptions and tags
 - `ARCHITECTURE.md` — System architecture overview (maintained via `/architecture`)
 
