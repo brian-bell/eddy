@@ -1,10 +1,14 @@
-# Productivity Workflow Hub
+# Eddy
 
-A personal command center powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code), Codex, and [Obsidian](https://obsidian.md). Manage tasks, PRs, Jira tickets, and incoming information from a single repo with 10 reusable workflow skills.
+*Your daily undercurrent of knowledge.*
+
+Manage tasks, PRs, Jira tickets, and incoming information from a single repo with reusable workflow skills.
+
+Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Codex](https://chatgpt.com/codex) and [Obsidian](https://obsidian.md). 
 
 ## Prerequisites
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or Codex
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Codex](https://chatgpt.com/codex)
 - GitHub access through MCP/plugin integration if available, or the `gh` CLI as a fallback for PR workflows
 - [Obsidian](https://obsidian.md) (for browsing the knowledge graph)
 - [acli](https://bobswift.atlassian.net/wiki/spaces/ACLI/overview) (optional, for Jira integration)
@@ -45,7 +49,7 @@ A personal command center powered by [Claude Code](https://docs.anthropic.com/en
 | `/whats-next` | Prioritized list of what to work on next |
 | `/architecture` | Build/update the system architecture doc via interview |
 
-## Codex Skills
+## Codex Skills Installation
 
 Codex discovers installed skills from `~/.agents/skills`, not from this repo directly. The source of truth for these skills lives in `.claude/skills/`.
 

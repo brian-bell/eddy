@@ -1,6 +1,8 @@
-# Productivity Workflow Hub
+# Eddy
 
-This repo is a personal command center for daily work. It combines an Obsidian knowledge vault with workflow skills that should work with Claude Code or Codex to manage tasks, PRs, Jira tickets, and incoming information.
+*Your daily undercurrent of knowledge.*
+
+A second memory that combines an Obsidian knowledge vault with workflow skills for Claude Code or Codex to manage tasks, PRs, Jira tickets, and incoming information.
 
 ## Skills
 
