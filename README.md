@@ -23,7 +23,7 @@ A personal command center powered by [Claude Code](https://docs.anthropic.com/en
 
 4. **Open the vault in Obsidian** — open the `notes/` folder as an Obsidian vault to browse the knowledge graph.
 
-5. **Start your coding agent** in the repo folder and you're ready to go:
+5. **Start Claude Code or Codex** in the repo folder and you're ready to go:
    ```sh
    claude
    # or
