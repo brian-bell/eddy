@@ -27,7 +27,7 @@ Then, present the active work streams and ask:
 - What's the priority? (infer from context if possible, confirm with user)
 - Are there any immediate action items beyond the task itself?
 
-Use the AskUserQuestion tool for structured questions where appropriate.
+Use structured questions where appropriate.
 
 ### 3. Create/Update Files
 
