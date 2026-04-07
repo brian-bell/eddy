@@ -15,6 +15,7 @@ This repo is a personal command center for daily work. It combines an Obsidian k
 | `/daily-plan` | Create today's plan from calendar + priorities |
 | `/recap` | Daily or weekly summary of all activity |
 | `/whats-next` | Signal-based prioritized next actions |
+| `/idea` | Capture an idea for passive tracking with auto-inferred metadata |
 | `/architecture` | Interview-based ARCHITECTURE.md creation/update |
 
 ## Key Files
@@ -36,6 +37,7 @@ The `notes/` directory is an Obsidian vault with these subdirectories:
 | `notes/recaps/` | Daily and weekly recap summaries |
 | `notes/workstreams/` | Work stream definitions (explicit registry) |
 | `notes/squawk/` | Ingested items — Slack messages, emails, meeting notes |
+| `notes/ideas/` | Idea notes — passively tracked feature/tool/process ideas |
 | `notes/templates/` | Note templates used by skills |
 
 ## Vault Conventions
