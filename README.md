@@ -2,6 +2,8 @@
 
 *Your daily undercurrent of knowledge.*
 
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-238636?logo=github&logoColor=white)](https://github.com/brian-bell/eddy/generate)
+
 Manage tasks, PRs, and incoming information from a single repo with reusable workflow skills.
 
 Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Codex](https://chatgpt.com/codex) and [Obsidian](https://obsidian.md). 
@@ -14,10 +16,10 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 
 ## Getting Started
 
-1. **Clone and enter the repo:**
+1. **Create your repo** — click the **"Use this template"** button above (or [here](https://github.com/brian-bell/eddy/generate)), then clone it:
    ```sh
-   git clone <repo-url> ~/dev/new-primary-workflow
-   cd ~/dev/new-primary-workflow
+   git clone <your-new-repo-url> ~/dev/eddy
+   cd ~/dev/eddy
    ```
 
 2. **Fill in your config** — edit `config.md` with your preferences. Your GitHub username is auto-detected from `gh` if authenticated; you can also set it manually in `config.md`.
