@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# install-codex-skills.sh — Symlink .claude/skills/ into ~/.agents/skills/
+# so Codex can discover them. Run after cloning or updating skills.
 
 set -euo pipefail
 
