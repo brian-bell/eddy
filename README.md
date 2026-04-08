@@ -2,7 +2,7 @@
 
 *Your daily undercurrent of knowledge.*
 
-Manage tasks, PRs, Jira tickets, and incoming information from a single repo with reusable workflow skills.
+Manage tasks, PRs, and incoming information from a single repo with reusable workflow skills.
 
 Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Codex](https://chatgpt.com/codex) and [Obsidian](https://obsidian.md). 
 
@@ -11,7 +11,6 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Codex](https://chatgpt.com/codex)
 - GitHub access through MCP/plugin integration if available, or the `gh` CLI as a fallback for PR workflows
 - [Obsidian](https://obsidian.md) (for browsing the knowledge graph)
-- [acli](https://bobswift.atlassian.net/wiki/spaces/ACLI/overview) (optional, for Jira integration)
 
 ## Getting Started
 
@@ -21,7 +20,7 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
    cd ~/dev/new-primary-workflow
    ```
 
-2. **Fill in your config** — edit `config.md` with your Jira credentials and preferences. Your GitHub username is auto-detected from `gh` if authenticated; you can also set it manually in `config.md`.
+2. **Fill in your config** — edit `config.md` with your preferences. Your GitHub username is auto-detected from `gh` if authenticated; you can also set it manually in `config.md`.
 
 3. **Add your repositories** — edit `repos.md` with the repos you work on (name, URL, description, tags). Or run `/architecture` to do this interactively.
 
@@ -76,3 +75,13 @@ Start a fresh Codex session after installing or updating these links.
 - **Squawk** (`notes/squawk/`) captures ingested info from any source
 
 All vault data is plain markdown files in git — portable, searchable, and version-controlled.
+
+## Optional Integrations
+
+### Jira
+
+The `/jira` skill lets you find, create, and track Jira tickets from within Eddy. Other skills (`/daily-plan`, `/whats-next`, `/recap`) will include Jira data when available but work fine without it.
+
+To enable Jira integration:
+1. Install [acli](https://bobswift.atlassian.net/wiki/spaces/ACLI/overview) (Atlassian CLI) and configure authentication
+2. Fill in the Jira section under "Optional Integrations" in `config.md`

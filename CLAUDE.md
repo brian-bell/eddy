@@ -2,7 +2,7 @@
 
 *Your daily undercurrent of knowledge.*
 
-A second memory that combines an Obsidian knowledge vault with workflow skills for Claude Code or Codex to manage tasks, PRs, Jira tickets, and incoming information.
+A second memory that combines an Obsidian knowledge vault with workflow skills for Claude Code or Codex to manage tasks, PRs, and incoming information.
 
 ## Skills
 
@@ -22,7 +22,7 @@ A second memory that combines an Obsidian knowledge vault with workflow skills f
 
 ## Key Files
 
-- `config.md` — GitHub username (auto-detected), Jira settings, preferences
+- `config.md` — GitHub username (auto-detected), preferences, optional integrations
 - `repos.md` — Registry of all git repositories with descriptions and tags
 - `ARCHITECTURE.md` — System architecture overview (maintained via `/architecture`)
 
