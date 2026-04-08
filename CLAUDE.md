@@ -18,6 +18,7 @@ A second memory that combines an Obsidian knowledge vault with workflow skills f
 | `/recap` | Daily or weekly summary of all activity |
 | `/whats-next` | Signal-based prioritized next actions |
 | `/idea` | Capture an idea for passive tracking with auto-inferred metadata |
+| `/eddy-setup` | Interactive onboarding wizard for vault configuration |
 | `/architecture` | Interview-based ARCHITECTURE.md creation/update |
 
 ## Key Files

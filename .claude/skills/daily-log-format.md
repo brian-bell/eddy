@@ -56,6 +56,7 @@ Use these prefixes in brackets:
 | `recap` | /recap |
 | `architecture` | /architecture |
 | `idea` | /idea |
+| `setup` | /eddy-setup |
 
 ## Creating the Daily Log
 
