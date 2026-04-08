@@ -22,18 +22,15 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
    cd ~/dev/eddy
    ```
 
-2. **Fill in your config** — edit `config.md` with your preferences. Your GitHub username is auto-detected from `gh` if authenticated; you can also set it manually in `config.md`.
-
-3. **Add your repositories** — edit `repos.md` with the repos you work on (name, URL, description, tags). Or run `/architecture` to do this interactively.
-
-4. **Open the vault in Obsidian** — open the `notes/` folder as an Obsidian vault to browse the knowledge graph.
-
-5. **Start Claude Code or Codex** in the repo folder and you're ready to go:
+2. **Run the setup wizard** — start Claude Code or Codex and run `/eddy-setup`. The wizard walks you through configuring your GitHub username, dev directory, scanning for repositories, and optionally setting up Jira and work streams.
    ```sh
    claude
-   # or
-   codex
+   # then type: /eddy-setup
    ```
+
+3. **Open the vault in Obsidian** — open the `notes/` folder as an Obsidian vault to browse the knowledge graph.
+
+You can also set up manually by editing `config.md` and `repos.md` directly, or run `/architecture` to register repos interactively.
 
 ## Skills
 
@@ -48,6 +45,7 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 | `/daily-plan` | Plan your day from calendar + open work |
 | `/recap` | Daily or weekly summary of what happened |
 | `/whats-next` | Prioritized list of what to work on next |
+| `/eddy-setup` | Interactive onboarding wizard for vault configuration |
 | `/architecture` | Build/update the system architecture doc via interview |
 
 ## Codex Skills Installation
