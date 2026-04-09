@@ -19,7 +19,9 @@ work_stream: Eddy Development
 ---
 ```
 
-All fields except `system`, `ticket_key`, `title`, `status`, and `date` are optional. Include what's available from the tracker.
+Required fields: `system`, `ticket_key`, `title`, `status`, `priority`, and `date`. All other fields are optional — include what's available from the tracker.
+
+**Field mapping note:** `project` and `team` are system-agnostic names. In Jira, `project` maps to the epic name (or equivalent grouping) and `team` maps to the Jira project key (e.g., BACK). Other trackers should map their closest equivalents to these fields.
 
 ## File Naming
 

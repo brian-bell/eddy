@@ -44,20 +44,21 @@ If ambiguous, ask the user.
 ### 4a. Find Mode
 
 1. Read `notes/workstreams/` for context — work stream descriptions, Jira epics
-2. Build a JQL query from the user's context. Examples:
+2. Check `notes/tickets/` for existing cached Jira tickets (files matching `jira-*.md`). To extract the Jira key from a vault filename, strip the `jira-` prefix (e.g., `jira-BACK-1234.md` → `BACK-1234`).
+3. Build a JQL query from the user's context. Examples:
    - "find tickets for error handling" → `project = <default> AND text ~ "error handling"`
    - "what's the Jira status for the auth epic" → `project = <default> AND "Epic Link" = <epic-key>`
-3. Run: `acli jira --action getIssueList --jql "<query>" --outputFormat 2`
-4. Parse results and display:
+4. Run: `acli jira --action getIssueList --jql "<query>" --outputFormat 2`
+5. Parse results and display:
    ```
    ## Jira Tickets: <search context>
    
-   | Key | Title | Status | Assignee |
-   |-----|-------|--------|----------|
-   | BACK-1234 | Fix error types | In Progress | brian |
-   | BACK-1235 | Add timeout handling | To Do | unassigned |
+   | Key | Title | Status | Priority | Assignee |
+   |-----|-------|--------|----------|----------|
+   | BACK-1234 | Fix error types | In Progress | High | brian |
+   | BACK-1235 | Add timeout handling | To Do | Medium | unassigned |
    ```
-5. Cache referenced tickets as vault notes (see step 5)
+6. Cache referenced tickets as vault notes (see step 5)
 
 ### 4b. Create Mode
 
@@ -87,11 +88,11 @@ If ambiguous, ask the user.
    
    **Epic:** BACK-1234 — Error Handling Overhaul
    
-   | Key | Title | Status | Assignee |
-   |-----|-------|--------|----------|
-   | BACK-1235 | Fix error types | Done | brian |
-   | BACK-1236 | Add timeout handling | In Progress | alice |
-   | BACK-1237 | Update error docs | To Do | unassigned |
+   | Key | Title | Status | Priority | Assignee |
+   |-----|-------|--------|----------|----------|
+   | BACK-1235 | Fix error types | Done | High | brian |
+   | BACK-1236 | Add timeout handling | In Progress | Medium | alice |
+   | BACK-1237 | Update error docs | To Do | Low | unassigned |
    
    Progress: 1/3 done
    ```
@@ -101,14 +102,15 @@ If ambiguous, ask the user.
 
 1. Parse the ticket key and comment text from the user's message
 2. If the ticket key is ambiguous, check `notes/tickets/` for recent Jira tickets and ask the user to confirm
-3. Run: `acli jira --action addComment --issue "<KEY>" --comment "<text>"`
-4. Update the cached vault note at `notes/tickets/jira-<KEY>.md`:
+3. Show the user the comment text and ticket key, and ask them to confirm before posting
+4. Run: `acli jira --action addComment --issue "<KEY>" --comment "<text>"`
+5. Update the cached vault note at `notes/tickets/jira-<KEY>.md`:
    - If the vault note doesn't exist, create it using the unified schema (see step 5) first
    - Append the comment to the **Comments** section:
      ```
      - **YYYY-MM-DD HH:MM** — <comment text>
      ```
-5. Append to daily log:
+6. Append to daily log:
    ```
    - **HH:MM** — [jira] Commented on [[jira-<KEY>]]: <short summary of comment>
    ```
