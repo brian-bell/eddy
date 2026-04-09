@@ -39,8 +39,8 @@ Read across the vault to build a picture of what's pending:
 - Read recent files in `notes/squawk/` (last 3 days) where `actionable: true`
 - Collect any unchecked action items
 
-**Jira (optional):**
-- Read files in `notes/jira/` — collect tickets assigned to the user that are in progress or todo
+**Tickets (optional):**
+- Read files in `notes/tickets/` — collect tickets assigned to the user that are in progress or todo (filter by `status` and `assignee`, system-agnostic)
 - If the user wants, refresh via `/jira` first
 
 **Work Streams:**

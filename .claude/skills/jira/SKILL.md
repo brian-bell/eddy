@@ -1,11 +1,11 @@
 ---
 name: jira
-description: Query, create, and track Jira tickets via acli - find, create, and status modes
+description: Query, create, track, comment on, and update Jira tickets via acli
 ---
 
 # Jira
 
-Manage Jira tickets via the Atlassian CLI (`acli`). Find tickets, create new ones, check status.
+Manage Jira tickets via the Atlassian CLI (`acli`). Find tickets, create new ones, check status, add comments, and update fields.
 
 ## Process
 
@@ -31,9 +31,13 @@ If any are unconfigured, ask the user to fill them in.
 
 From the user's message, determine which mode to use:
 
-- **Find** — User wants to search for tickets. Trigger words: "find", "search", "look for", "what tickets", "related to"
-- **Create** — User wants to create a ticket. Trigger words: "create", "write", "make", "new ticket"
-- **Status** — User wants ticket status. Trigger words: "status", "what's happening", "update on", "how's"
+| Mode | Triggers |
+|------|----------|
+| **Find** | find, search, look for, what tickets, related to |
+| **Create** | create, new, make, write |
+| **Status** | status, what's happening, update on, how's, progress |
+| **Comment** | comment, reply, note on, add note |
+| **Update** | update, change, set, move, assign, close |
 
 If ambiguous, ask the user.
 
@@ -74,7 +78,7 @@ If ambiguous, ask the user.
 
 1. Determine which tickets to check:
    - From user's context, match to work streams and their `jira_epic` fields
-   - Check existing `notes/jira/` vault notes for cached tickets
+   - Check existing `notes/tickets/` vault notes for cached Jira tickets (files matching `jira-*.md`)
    - Build JQL query for relevant tickets
 2. Run: `acli jira --action getIssueList --jql "<query>" --outputFormat 2`
 3. Display status summary:
@@ -93,27 +97,76 @@ If ambiguous, ask the user.
    ```
 4. Update cached vault notes with latest status
 
+### 4d. Comment Mode
+
+1. Parse the ticket key and comment text from the user's message
+2. If the ticket key is ambiguous, check `notes/tickets/` for recent Jira tickets and ask the user to confirm
+3. Run: `acli jira --action addComment --issue "<KEY>" --comment "<text>"`
+4. Update the cached vault note at `notes/tickets/jira-<KEY>.md`:
+   - If the vault note doesn't exist, create it using the unified schema (see step 5) first
+   - Append the comment to the **Comments** section:
+     ```
+     - **YYYY-MM-DD HH:MM** — <comment text>
+     ```
+5. Append to daily log:
+   ```
+   - **HH:MM** — [jira] Commented on [[jira-<KEY>]]: <short summary of comment>
+   ```
+
+### 4e. Update Mode
+
+1. Parse the ticket key, field to update, and new value from the user's message
+2. Supported fields (only these three):
+
+   **Status:**
+   - Run: `acli jira --action transitionIssue --issue "<KEY>" --transition "<status>"`
+   - If the command fails (custom workflow state name mismatch), fall back:
+     1. Run: `acli jira --action getTransitionList --issue "<KEY>"`
+     2. Present available transitions to the user
+     3. Ask the user to pick one, then retry with the selected transition name
+
+   **Assignee:**
+   - Run: `acli jira --action updateIssue --issue "<KEY>" --assignee "<username>"`
+
+   **Priority:**
+   - Run: `acli jira --action updateIssue --issue "<KEY>" --priority "<priority>"`
+
+3. Update the cached vault note at `notes/tickets/jira-<KEY>.md` to reflect the change:
+   - If the vault note doesn't exist, create it using the unified schema (see step 5) first
+   - Update the relevant frontmatter field and the Details section
+4. Append to daily log:
+   ```
+   - **HH:MM** — [jira] Updated [[jira-<KEY>]]: <field> → <new value>
+   ```
+
 ### 5. Cache as Vault Notes
 
-For each ticket referenced, create or update `notes/jira/<TICKET-KEY>.md`:
+For each ticket referenced, create or update `notes/tickets/jira-<KEY>.md` using the unified ticket schema (see `ticket-format.md`):
 
 ```markdown
 ---
-jira_key: <KEY>
+system: jira
+ticket_key: <KEY>
 title: "<title>"
 status: <status>
-epic: <epic name>
+project: <epic name>
+team: <project key>
 assignee: <assignee>
+priority: <priority>
 date: <today>
+work_stream: <matched work stream or empty>
 ---
 
 # <KEY>: <title>
 
 ## Details
 - **Status:** <status>
-- **Epic:** [[<epic-name>]]
+- **Project:** [[<epic-name>]]
 - **Assignee:** <assignee>
 - **Priority:** <priority>
+
+## Comments
+<!-- Appended by comment mode -->
 
 ## Related
 <!-- Add wikilinks to work streams, PRs, notes -->
@@ -125,8 +178,10 @@ Add `[[wikilinks]]` to related work streams (match via `jira_epic` in work strea
 
 Append to `notes/daily/YYYY-MM-DD.md`:
 - Find: `- **HH:MM** — [jira] Searched Jira: <context> — found N tickets`
-- Create: `- **HH:MM** — [jira] Created ticket [[<KEY>]]: <title>`
+- Create: `- **HH:MM** — [jira] Created ticket [[jira-<KEY>]]: <title>`
 - Status: `- **HH:MM** — [jira] Checked Jira status: <context> — N tickets, X done`
+- Comment: `- **HH:MM** — [jira] Commented on [[jira-<KEY>]]: <summary>`
+- Update: `- **HH:MM** — [jira] Updated [[jira-<KEY>]]: <field> → <new value>`
 
 ## Important Rules
 
