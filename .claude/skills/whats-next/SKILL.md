@@ -28,8 +28,8 @@ Read across the entire vault:
 - Read files in `notes/squawk/` where `actionable: true`
 - Collect unchecked items from Action Items sections
 
-**Jira Tickets:**
-- Read files in `notes/jira/` — collect tickets where:
+**Tickets:**
+- Read files in `notes/tickets/` — collect tickets where (system-agnostic, filter by frontmatter fields):
   - Assigned to the user and status is In Progress or To Do
   - Status recently changed (might need follow-up)
 

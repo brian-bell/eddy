@@ -26,7 +26,7 @@ Read `config.md` and extract values from the markdown list items. Each setting i
 - **Default Project** — Default Jira project key (e.g., BACK)
 - **Instance** — Jira instance URL (e.g., mycompany.atlassian.net)
 
-These values are only needed if using the `/jira` skill. Other skills that surface Jira data (`/daily-plan`, `/whats-next`, `/recap`) read from cached vault notes in `notes/jira/` and work fine without Jira configured.
+These values are only needed if using the `/jira` skill. Other skills that surface ticket data (`/daily-plan`, `/whats-next`, `/recap`) read from cached vault notes in `notes/tickets/` and work fine without Jira configured.
 
 ## Usage in Skills
 

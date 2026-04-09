@@ -38,8 +38,8 @@ Check if the user specified "daily" or "weekly" in their message. Default to "da
 - Read files in `notes/ideas/` created today (match `date:` frontmatter)
 - Note: title and related streams for each
 
-**Jira Changes:**
-- Read files in `notes/jira/` modified today — status changes
+**Ticket Changes:**
+- Read files in `notes/tickets/` modified today — status changes (system-agnostic)
 
 **Work Stream Updates:**
 - Read files in `notes/workstreams/` modified today

@@ -32,9 +32,11 @@ These fields are used across note types. Only include fields relevant to the not
 | `pr` | number | Pull request number — PR notes only |
 | `title` | string | Human-readable title |
 | `reviewers` | list | GitHub usernames of reviewers — PR notes only |
-| `jira_key` | string | Jira ticket key (e.g., BACK-1234) — Jira notes only |
-| `epic` | string | Jira epic name — Jira notes only |
-| `assignee` | string | Jira assignee — Jira notes only |
+| `system` | string | Ticket source system (e.g., jira) — ticket notes only |
+| `ticket_key` | string | Ticket identifier within the system (e.g., BACK-1234) — ticket notes only |
+| `project` | string | Project grouping (e.g., Jira epic) — ticket notes only |
+| `team` | string | Team identifier (e.g., Jira project key) — ticket notes only |
+| `assignee` | string | Ticket assignee — ticket notes only |
 | `priority` | string | Priority level if explicitly set |
 
 ## Wikilinks
@@ -43,7 +45,7 @@ Use `[[wikilinks]]` to connect related notes:
 
 - Link to work streams: `[[Work Stream Name]]`
 - Link to PRs: `[[repo-123]]` (matching the filename in `notes/prs/`)
-- Link to Jira tickets: `[[BACK-1234]]` (matching the filename in `notes/jira/`)
+- Link to tickets: `[[jira-BACK-1234]]` (matching the filename in `notes/tickets/`)
 - Link to daily logs: `[[YYYY-MM-DD]]`
 - Link to other notes by their filename (without extension)
 
@@ -68,7 +70,7 @@ Every skill that creates or modifies vault data MUST append a summary entry to t
 - Squawk notes: `YYYY-MM-DD-<short-slug>.md` (e.g., `2026-04-04-auth-error-discussion.md`)
 - Idea notes: `YYYY-MM-DD-<short-slug>.md` (e.g., `2026-04-06-cli-dashboard.md`)
 - PR notes: `<repo>-<number>.md` (e.g., `backflow-142.md`)
-- Jira notes: `<TICKET-KEY>.md` (e.g., `BACK-1234.md`)
+- Ticket notes: `<system>-<KEY>.md` (e.g., `jira-BACK-1234.md`)
 - Work streams: `<work-stream-name>.md` (e.g., `error-handling-overhaul.md`)
 - Todo files: `<work-stream-name>.md` (matches the work stream name)
 - Recaps: `YYYY-MM-DD.md` for daily, `week-YYYY-WW.md` for weekly
