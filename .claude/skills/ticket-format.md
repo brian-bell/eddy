@@ -28,14 +28,16 @@ Required fields: `system`, `ticket_key`, `title`, `status`, `priority`, and `dat
 Files live in `notes/tickets/` and are named `{system}-{KEY}.md`:
 
 - Jira: `jira-BACK-1234.md`
+- Linear: `linear-BACK-123.md`
 
-The system prefix prevents collisions if additional trackers are added in the future.
+The system prefix prevents collisions when multiple trackers are in use.
 
 ## Wikilinks
 
 Link to tickets using the system-prefixed filename:
 
 - `[[jira-BACK-1234]]`
+- `[[linear-BACK-123]]`
 
 ## Ticket Note Template
 
@@ -56,6 +58,19 @@ Use `notes/templates/ticket.md` as the base. The body structure:
 ## Related
 <!-- Links to work streams, PRs, notes -->
 ```
+
+## Linear Field Mapping
+
+Linear uses a numeric priority scale. Map to human-readable names in vault notes:
+
+| Linear Value | Vault Value |
+|-------------|-------------|
+| 1 | Urgent |
+| 2 | High |
+| 3 | Medium |
+| 4 | Low |
+
+Linear `project` maps to the ticket `project` field. Linear `team` maps to the ticket `team` field.
 
 ## Linking Tickets to Work Streams
 
@@ -83,4 +98,13 @@ Jira uses the `[jira]` action type prefix:
 - **09:30** — [jira] Created ticket [[jira-BACK-1234]]: Fix auth timeout
 - **10:00** — [jira] Commented on [[jira-BACK-1234]]: investigating root cause
 - **10:15** — [jira] Updated [[jira-BACK-1234]]: status → In Progress
+```
+
+Linear uses the `[linear]` action type prefix:
+
+```markdown
+- **09:15** — [linear] Searched Linear: error handling — found 3 tickets
+- **09:30** — [linear] Created ticket [[linear-BACK-123]]: Fix auth timeout
+- **10:00** — [linear] Commented on [[linear-BACK-123]]: investigating root cause
+- **10:15** — [linear] Updated [[linear-BACK-123]]: status → In Progress
 ```

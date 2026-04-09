@@ -28,6 +28,12 @@ Read `config.md` and extract values from the markdown list items. Each setting i
 
 These values are only needed if using the `/jira` skill. Other skills that surface ticket data (`/daily-plan`, `/whats-next`, `/recap`) read from cached vault notes in `notes/tickets/` and work fine without Jira configured.
 
+#### Linear
+- **Default Team** — Default Linear team for scoping queries and creating tickets (e.g., Backend)
+- **Backend** — Which integration to use: `linearis` (CLI, default) or `mcp` (Linear MCP server)
+
+These values are only needed if using the `/linear` skill.
+
 ## Usage in Skills
 
 When a skill needs a config value:
