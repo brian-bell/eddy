@@ -55,7 +55,7 @@ If ambiguous, ask the user.
 2. Check `notes/tickets/` for existing cached Linear tickets (files matching `linear-*.md`). To extract the Linear key from a vault filename, strip the `linear-` prefix (e.g., `linear-BACK-123.md` → `BACK-123`).
 3. Build query from user context
 4. Execute search (see Backend Commands)
-   - **linearis:** Run `linearis issues list --query "<text>" --limit 25`. Parse the JSON response. If results need filtering by team/status/assignee, filter client-side since `--team`/`--status`/`--assignee` flags are not yet available (linearis-oss/linearis#124).
+   - **linearis:** Run `linearis issues search "<text>" --limit 25`. Add `--team <team>`, `--status "<statuses>"`, `--assignee <user>`, or `--priority <n>` flags to filter server-side. Parse the JSON response.
    - **MCP:** Call `list_issues` with `query` param. If search fails (linear/linear#1028), fall back to `list_my_issues` and filter client-side. **Note:** `list_my_issues` only returns the current user's issues. If using this fallback, tell the user: "Search fell back to your issues only — results may be incomplete. Use `linearis` backend for full team search."
 5. Display formatted results:
    ```
@@ -90,7 +90,9 @@ If ambiguous, ask the user.
    - From user's context, match to work streams and their associated projects
    - Check existing cached notes in `notes/tickets/` where `system: linear`
    - Build query for relevant tickets
-2. Execute search (see Backend Commands — same as Find)
+2. Execute search (see Backend Commands)
+   - **linearis:** Use `linearis issues list --team <team> --status "<statuses>" --limit 25` to filter directly. Add `--assignee`, `--priority`, or `--project` flags as needed.
+   - **MCP:** Same as Find mode
 3. Display status summary:
    ```
    ## Linear Status: <context>
@@ -205,7 +207,8 @@ Append to `notes/daily/YYYY-MM-DD.md` (create from template if it doesn't exist)
 
 | Operation | Command |
 |-----------|---------|
-| Search | `linearis issues list --query "<text>" --limit 25` then filter JSON by team/status/assignee client-side |
+| Search | `linearis issues search "<text>" --limit 25 [--team <team>] [--status "<statuses>"] [--assignee <user>] [--priority <n>]` |
+| List (filtered) | `linearis issues list --team <team> [--status "<statuses>"] [--assignee <user>] [--priority <n>] --limit 25` |
 | Get issue | `linearis issues read <KEY>` |
 | Create | `linearis issues create "<title>" --team <team> --description "<desc>" --priority <n> [--project "<project>"] [--status "<status>"]` |
 | Comment | `linearis comments create <KEY> --body "<text>"` |
@@ -219,7 +222,7 @@ Priority values: 1=Urgent, 2=High, 3=Medium, 4=Low.
 
 All linearis commands output JSON to stdout. Parse with standard JSON handling.
 
-**Known limitation:** `issues list` does not yet support `--team`/`--status`/`--assignee` filter flags (linearis-oss/linearis#124). Workaround: use `--query` for text search, then filter JSON results client-side.
+**Filter flags:** `issues list` and `issues search` both support `--team`, `--status`, `--assignee`, `--creator`, `--project`, `--label`, `--priority`, `--cycle`, `--parent`, `--milestone`, `--estimate`, and date range flags (`--due-before`, `--due-after`, `--created-after`, `--created-before`, etc.). Use these for server-side filtering instead of filtering JSON client-side. Note: `--status` and `--cycle` require `--team`; `--milestone` requires `--project`.
 
 ### Linear MCP
 
