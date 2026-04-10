@@ -22,10 +22,10 @@ If the user's message contains what looks like a ticket number (e.g., "BACK-123"
 
 **If a cached ticket is found:** read its frontmatter and use the ticket's `title`, `project`, and `work_stream` to pre-populate the task context. The user can still override any pre-populated values.
 
-**If no cached ticket is found:** tell the user:
-> No cached ticket found for `<KEY>`. Run `/linear` or `/jira` to look it up first, then try again.
+**If no cached ticket is found:** warn the user and offer to continue:
+> No cached ticket found for `<KEY>`. You can run `/linear` or `/jira` to look it up and pre-populate context, or I can continue without it.
 
-Then stop.
+If the user chooses to continue, proceed to the Interview step with no pre-populated values. If the user wants to look it up first, stop and let them run the lookup skill.
 
 ### 3. Interview the User
 

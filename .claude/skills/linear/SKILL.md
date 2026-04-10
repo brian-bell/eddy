@@ -56,7 +56,7 @@ If ambiguous, ask the user.
 3. Build query from user context
 4. Execute search (see Backend Commands)
    - **linearis:** Run `linearis issues list --query "<text>" --limit 25`. Parse the JSON response. If results need filtering by team/status/assignee, filter client-side since `--team`/`--status`/`--assignee` flags are not yet available (linearis-oss/linearis#124).
-   - **MCP:** Call `list_issues` with `query` param. If search fails (linear/linear#1028), fall back to `list_my_issues` and filter client-side.
+   - **MCP:** Call `list_issues` with `query` param. If search fails (linear/linear#1028), fall back to `list_my_issues` and filter client-side. **Note:** `list_my_issues` only returns the current user's issues. If using this fallback, tell the user: "Search fell back to your issues only — results may be incomplete. Use `linearis` backend for full team search."
 5. Display formatted results:
    ```
    ## Linear Tickets: <search context>
@@ -164,6 +164,7 @@ project: <Linear project name>
 team: <Linear team name>
 assignee: <assignee>
 priority: <priority name>
+url: <url from API/CLI response>
 date: <today>
 work_stream: <matched work stream or empty>
 ---
@@ -176,6 +177,7 @@ work_stream: <matched work stream or empty>
 - **Team:** <team>
 - **Assignee:** <assignee>
 - **Priority:** <priority name>
+- **URL:** <url>
 
 ## Comments
 <!-- Appended by comment mode -->
@@ -235,7 +237,7 @@ All linearis commands output JSON to stdout. Parse with standard JSON handling.
 **Important MCP notes:**
 - `save_issue` is a unified create/update tool — include the issue identifier to update, omit to create
 - Status field requires UUID, not name — always call `list_issue_statuses` first and resolve the name to UUID
-- `list_issues` `query` param has a known bug (linear/linear#1028) — if search fails, fall back to `list_my_issues` and filter client-side
+- `list_issues` `query` param has a known bug (linear/linear#1028) — if search fails, fall back to `list_my_issues` and filter client-side. Always inform the user when this fallback is used, since `list_my_issues` only returns the current user's issues
 
 ## Important Rules
 

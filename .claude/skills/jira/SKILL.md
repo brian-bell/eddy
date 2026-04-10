@@ -155,6 +155,7 @@ project: <epic name>
 team: <project key>
 assignee: <assignee>
 priority: <priority>
+url: https://<instance>/browse/<KEY>
 date: <today>
 work_stream: <matched work stream or empty>
 ---
@@ -166,6 +167,7 @@ work_stream: <matched work stream or empty>
 - **Project:** [[<epic-name>]]
 - **Assignee:** <assignee>
 - **Priority:** <priority>
+- **URL:** https://<instance>/browse/<KEY>
 
 ## Comments
 <!-- Appended by comment mode -->

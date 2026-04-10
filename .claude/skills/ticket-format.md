@@ -14,12 +14,17 @@ project: Error Handling       # Jira epic or equivalent grouping
 team: BACK                    # Jira project key or equivalent
 assignee: brian-bell
 priority: High
+url: https://mycompany.atlassian.net/browse/BACK-1234
 date: 2026-04-08
 work_stream: Eddy Development
 ---
 ```
 
 Required fields: `system`, `ticket_key`, `title`, `status`, `priority`, and `date`. All other fields are optional — include what's available from the tracker.
+
+**URL construction:** Each system has a predictable URL pattern:
+- Jira: `https://{instance}/browse/{KEY}` (instance from config.md)
+- Linear: use the `url` field returned by the API/CLI response
 
 **Field mapping note:** `project` and `team` are system-agnostic names. In Jira, `project` maps to the epic name (or equivalent grouping) and `team` maps to the Jira project key (e.g., BACK). Other trackers should map their closest equivalents to these fields.
 
@@ -51,6 +56,7 @@ Use `notes/templates/ticket.md` as the base. The body structure:
 - **Project:** [[{project}]]
 - **Assignee:** {assignee}
 - **Priority:** {priority}
+- **URL:** {url}
 
 ## Comments
 <!-- Appended by comment mode -->
