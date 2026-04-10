@@ -22,9 +22,9 @@ work_stream: Eddy Development
 
 Required fields: `system`, `ticket_key`, `title`, `status`, `priority`, and `date`. All other fields are optional — include what's available from the tracker.
 
-**URL construction:** Each system has a predictable URL pattern:
-- Jira: `https://{instance}/browse/{KEY}` (instance from config.md)
-- Linear: use the `url` field returned by the API/CLI response
+**URL field:** Populate when the tracker exposes an addressable URL for the ticket:
+- Jira: construct as `https://{instance}/browse/{KEY}` (instance from config.md)
+- Linear: the `linearis` CLI does not expose issue URLs; use the literal value `<unavailable>`
 
 **Field mapping note:** `project` and `team` are system-agnostic names. In Jira, `project` maps to the epic name (or equivalent grouping) and `team` maps to the Jira project key (e.g., BACK). Other trackers should map their closest equivalents to these fields.
 
@@ -71,6 +71,7 @@ Linear uses a numeric priority scale. Map to human-readable names in vault notes
 
 | Linear Value | Vault Value |
 |-------------|-------------|
+| 0 | None |
 | 1 | Urgent |
 | 2 | High |
 | 3 | Medium |

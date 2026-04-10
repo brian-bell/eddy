@@ -77,7 +77,7 @@ If ambiguous, ask the user.
    - Priority (default: Medium)
 3. Read default team from `config.md`, confirm or allow override
 4. Execute create (see Backend Commands)
-   - **linearis:** Run `linearis issues create "<title>" --team <team> --description "<desc>" --priority <n>` (add `--project "<project>"` and `--status "<status>"` if applicable). Priority uses Linear's numeric scale: 1=Urgent, 2=High, 3=Medium, 4=Low.
+   - **linearis:** Run `linearis issues create "<title>" --team <team> --description "<desc>" --priority <n>` (add `--project "<project>"` and `--status "<status>"` if applicable). Priority uses Linear's numeric scale: 0=None, 1=Urgent, 2=High, 3=Medium, 4=Low.
    - **MCP:** Call `save_issue` with `title`, `team`, `description`, `priority`, `project`. Omit the issue identifier to create (not update). For status, call `list_issue_statuses` first to resolve the name to a UUID.
 5. Display the created ticket key
 6. Cache as vault note (see step 5 — Cache as Vault Notes)
@@ -140,7 +140,7 @@ If ambiguous, ask the user.
    - **MCP:** Call `save_issue` with the issue identifier and assignee field.
 
    **Priority:**
-   - **linearis:** Run `linearis issues update <KEY> --priority <n>` (1=Urgent, 2=High, 3=Medium, 4=Low)
+   - **linearis:** Run `linearis issues update <KEY> --priority <n>` (0=None, 1=Urgent, 2=High, 3=Medium, 4=Low)
    - **MCP:** Call `save_issue` with the issue identifier and priority value.
 
 3. If the field to update is ambiguous, ask the user which field and new value
@@ -166,7 +166,7 @@ project: <Linear project name>
 team: <Linear team name>
 assignee: <assignee>
 priority: <priority name>
-url: <url from API/CLI response>
+url: <unavailable>
 date: <today>
 work_stream: <matched work stream or empty>
 ---
@@ -179,7 +179,7 @@ work_stream: <matched work stream or empty>
 - **Team:** <team>
 - **Assignee:** <assignee>
 - **Priority:** <priority name>
-- **URL:** <url>
+- **URL:** <unavailable>
 
 ## Comments
 <!-- Appended by comment mode -->
@@ -188,7 +188,9 @@ work_stream: <matched work stream or empty>
 <!-- Add wikilinks to work streams, PRs, notes -->
 ```
 
-**Priority mapping:** Convert Linear's numeric values to human-readable names: 1=Urgent, 2=High, 3=Medium, 4=Low.
+**Priority mapping:** Convert Linear's numeric values to human-readable names: 0=None, 1=Urgent, 2=High, 3=Medium, 4=Low. Tickets with no priority set return `0`.
+
+**URL field:** The `linearis` CLI does not expose issue URLs on `issues list`, `issues search`, or `issues read`. Always write the literal string `<unavailable>` for the `url` field in cached Linear ticket notes.
 
 **Work stream matching:** Compare ticket `project`, `title`, and `description` against work stream descriptions and repos. If a match is found, set `work_stream` in frontmatter and add a `[[Work Stream Name]]` wikilink in the Related section.
 
@@ -218,7 +220,7 @@ Append to `notes/daily/YYYY-MM-DD.md` (create from template if it doesn't exist)
 | List teams | `linearis teams list` |
 | List projects | `linearis projects list` |
 
-Priority values: 1=Urgent, 2=High, 3=Medium, 4=Low.
+Priority values: 0=None, 1=Urgent, 2=High, 3=Medium, 4=Low.
 
 All linearis commands output JSON to stdout. Parse with standard JSON handling.
 
@@ -249,4 +251,4 @@ All linearis commands output JSON to stdout. Parse with standard JSON handling.
 - Link vault notes to work streams via `[[wikilinks]]`
 - For create mode, always confirm the ticket details with the user before creating
 - For comment mode, always show the comment text and confirm before posting
-- Map Linear's numeric priority (1-4) to human-readable names in all vault output
+- Map Linear's numeric priority (0-4) to human-readable names in all vault output
