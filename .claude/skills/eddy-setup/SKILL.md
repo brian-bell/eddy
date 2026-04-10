@@ -5,7 +5,7 @@ description: Interactive onboarding wizard — configure vault, scan repos, and 
 
 # Eddy Setup Wizard
 
-Walk the user through onboarding: configure `config.md`, scan for repositories, and optionally set up Jira and work streams.
+Walk the user through onboarding: configure `config.md`, scan for repositories, and optionally set up Jira, Linear, and work streams.
 
 ## Process
 
@@ -70,7 +70,18 @@ Ask: "Do you use Jira for ticket tracking?"
 
 On re-run with existing Jira values, show each current value with the option to keep or change.
 
-### 6. Scan Dev Directory for Repositories
+### 6. Collect Linear Configuration (Optional)
+
+Ask: "Do you use Linear for ticket tracking?"
+
+- **If no** (or skip): Leave Linear values as placeholders (first run) or preserve existing values (re-run). Move on.
+- **If yes**: Collect two values:
+  - "What's your default Linear team? (e.g., Backend)"
+  - "Which backend do you want to use?" — offer `linearis` (CLI, default) or `mcp` (Linear MCP server). Briefly explain: linearis is a CLI tool (`npm install -g linearis`), MCP uses the official Linear MCP server.
+
+On re-run with existing Linear values, show each current value with the option to keep or change.
+
+### 7. Scan Dev Directory for Repositories
 
 List the immediate children of the dev directory that contain a `.git` directory:
 
@@ -101,7 +112,7 @@ Deselect any you don't want to register, or confirm to proceed.
 
 If no new repos are found, report that and move on.
 
-### 7. Offer Work Stream Creation (Optional)
+### 8. Offer Work Stream Creation (Optional)
 
 Briefly explain what work streams are:
 - "Work streams organize your tasks into coherent bodies of work — like an epic or initiative. Each gets its own todo list and can be linked to repos and Jira epics."
@@ -116,7 +127,7 @@ Then ask: "Would you like to create a work stream now? (You can always create th
 
 The wizard may offer to create multiple work streams by repeating the prompt.
 
-### 8. Show Summary and Confirm
+### 9. Show Summary and Confirm
 
 Display a complete summary of everything that will be written. Clearly distinguish between unchanged, updated, and new values:
 
@@ -128,6 +139,7 @@ Here's what I'll set up:
   Dev Directory:   ~/dev
   Default Branch:  main
   Jira:            skipped
+  Linear:          skipped
 
 📦 repos.md — 3 new repos
   + backflow — REST API service (go, backend)
@@ -151,6 +163,8 @@ On re-run, mark unchanged values:
   Jira Username:   brian.bell (new)
   Jira Project:    BACK (new)
   Jira Instance:   mycompany.atlassian.net (new)
+  Linear Team:     Backend (new)
+  Linear Backend:  linearis (new)
 ```
 
 **Wait for a single confirmation before writing any files.**
@@ -159,7 +173,7 @@ If nothing changed (re-run with all values current and no new repos), report:
 - "Everything is already up to date. No changes needed."
 Skip the write entirely.
 
-### 9. Write Files
+### 10. Write Files
 
 After the user confirms, write all files:
 
@@ -183,6 +197,10 @@ Write the full config file with the collected values:
 - **Username:** {jira_username or <!-- your Jira username -->}
 - **Default Project:** {jira_project or <!-- e.g., BACK -->}
 - **Instance:** {jira_instance or <!-- e.g., mycompany.atlassian.net -->}
+
+### Linear
+- **Default Team:** {linear_team or <!-- e.g., Backend -->}
+- **Backend:** {linear_backend or linearis} <!-- linearis | mcp -->
 ```
 
 #### repos.md
@@ -205,7 +223,7 @@ For each work stream the user chose to create:
 1. Create `notes/workstreams/{name}.md` from `notes/templates/workstream.md`, filling in the name and description. Leave repo and Jira epic fields as template placeholders.
 2. Create `notes/todos/{name}.md` from `notes/templates/todo.md`, filling in the work stream name.
 
-### 10. Update Daily Log
+### 11. Update Daily Log
 
 Open or create today's daily log at `notes/daily/YYYY-MM-DD.md`:
 - If it doesn't exist, create it from `notes/templates/daily.md`, filling in today's date.
@@ -220,8 +238,9 @@ Where `{details}` includes a brief summary of what was done, e.g.:
 - `, registered 3 repos`
 - `, created work stream [[error-handling-overhaul]]`
 - `, updated Jira config`
+- `, configured Linear (linearis backend)`
 
-### 11. Summarize
+### 12. Summarize
 
 Tell the user what was written and suggest next steps:
 - What files were created or updated
