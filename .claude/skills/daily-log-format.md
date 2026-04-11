@@ -52,6 +52,7 @@ Use these prefixes in brackets:
 | `my-prs` | /my-prs |
 | `review-prs` | /review-prs |
 | `jira` | /jira |
+| `linear` | /linear |
 | `daily-plan` | /daily-plan |
 | `recap` | /recap |
 | `architecture` | /architecture |

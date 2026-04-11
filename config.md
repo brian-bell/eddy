@@ -13,3 +13,7 @@
 - **Username:** <!-- your Jira username -->
 - **Default Project:** <!-- e.g., BACK -->
 - **Instance:** <!-- e.g., mycompany.atlassian.net -->
+
+### Linear
+- **Default Team:** <!-- e.g., Backend -->
+- **Backend:** linearis <!-- linearis | mcp -->

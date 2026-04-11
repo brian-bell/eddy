@@ -14,6 +14,7 @@ A second memory that combines an Obsidian knowledge vault with workflow skills f
 | `/my-prs` | Manage your authored PRs with review feedback todos |
 | `/review-prs` | List PRs awaiting your review action |
 | `/jira` | Query, create, track, comment on, and update Jira tickets via acli |
+| `/linear` | Query, create, track, comment on, and update Linear tickets via linearis or MCP |
 | `/daily-plan` | Create today's plan from calendar + priorities |
 | `/recap` | Daily or weekly summary of all activity |
 | `/whats-next` | Signal-based prioritized next actions |
@@ -36,7 +37,7 @@ The `notes/` directory is an Obsidian vault with these subdirectories:
 | `notes/daily/` | Daily logs (`YYYY-MM-DD.md`) — the spine of each day |
 | `notes/todos/` | Per-work-stream todo files with checkbox items |
 | `notes/prs/` | PR tracking notes with review feedback todos |
-| `notes/tickets/` | Cached ticket notes (Jira) |
+| `notes/tickets/` | Cached ticket notes (Jira, Linear) |
 | `notes/recaps/` | Daily and weekly recap summaries |
 | `notes/workstreams/` | Work stream definitions (explicit registry) |
 | `notes/squawk/` | Ingested items — Slack messages, emails, meeting notes |

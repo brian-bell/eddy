@@ -14,12 +14,17 @@ project: Error Handling       # Jira epic or equivalent grouping
 team: BACK                    # Jira project key or equivalent
 assignee: brian-bell
 priority: High
+url: https://mycompany.atlassian.net/browse/BACK-1234
 date: 2026-04-08
 work_stream: Eddy Development
 ---
 ```
 
 Required fields: `system`, `ticket_key`, `title`, `status`, `priority`, and `date`. All other fields are optional — include what's available from the tracker.
+
+**URL field:** Populate when the tracker exposes an addressable URL for the ticket:
+- Jira: construct as `https://{instance}/browse/{KEY}` (instance from config.md)
+- Linear: the `linearis` CLI does not expose issue URLs; use the literal value `<unavailable>`
 
 **Field mapping note:** `project` and `team` are system-agnostic names. In Jira, `project` maps to the epic name (or equivalent grouping) and `team` maps to the Jira project key (e.g., BACK). Other trackers should map their closest equivalents to these fields.
 
@@ -28,14 +33,16 @@ Required fields: `system`, `ticket_key`, `title`, `status`, `priority`, and `dat
 Files live in `notes/tickets/` and are named `{system}-{KEY}.md`:
 
 - Jira: `jira-BACK-1234.md`
+- Linear: `linear-BACK-123.md`
 
-The system prefix prevents collisions if additional trackers are added in the future.
+The system prefix prevents collisions when multiple trackers are in use.
 
 ## Wikilinks
 
 Link to tickets using the system-prefixed filename:
 
 - `[[jira-BACK-1234]]`
+- `[[linear-BACK-123]]`
 
 ## Ticket Note Template
 
@@ -49,6 +56,7 @@ Use `notes/templates/ticket.md` as the base. The body structure:
 - **Project:** [[{project}]]
 - **Assignee:** {assignee}
 - **Priority:** {priority}
+- **URL:** {url}
 
 ## Comments
 <!-- Appended by comment mode -->
@@ -56,6 +64,20 @@ Use `notes/templates/ticket.md` as the base. The body structure:
 ## Related
 <!-- Links to work streams, PRs, notes -->
 ```
+
+## Linear Field Mapping
+
+Linear uses a numeric priority scale. Map to human-readable names in vault notes:
+
+| Linear Value | Vault Value |
+|-------------|-------------|
+| 0 | None |
+| 1 | Urgent |
+| 2 | High |
+| 3 | Medium |
+| 4 | Low |
+
+Linear `project` maps to the ticket `project` field. Linear `team` maps to the ticket `team` field.
 
 ## Linking Tickets to Work Streams
 
@@ -83,4 +105,13 @@ Jira uses the `[jira]` action type prefix:
 - **09:30** — [jira] Created ticket [[jira-BACK-1234]]: Fix auth timeout
 - **10:00** — [jira] Commented on [[jira-BACK-1234]]: investigating root cause
 - **10:15** — [jira] Updated [[jira-BACK-1234]]: status → In Progress
+```
+
+Linear uses the `[linear]` action type prefix:
+
+```markdown
+- **09:15** — [linear] Searched Linear: error handling — found 3 tickets
+- **09:30** — [linear] Created ticket [[linear-BACK-123]]: Fix auth timeout
+- **10:00** — [linear] Commented on [[linear-BACK-123]]: investigating root cause
+- **10:15** — [linear] Updated [[linear-BACK-123]]: status → In Progress
 ```

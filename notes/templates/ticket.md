@@ -7,6 +7,7 @@ project: {{project}}
 team: {{team}}
 assignee: {{assignee}}
 priority: {{priority}}
+url: {{url}}
 date: {{date}}
 work_stream: {{work_stream}}
 ---
@@ -18,6 +19,7 @@ work_stream: {{work_stream}}
 - **Project:** [[{{project}}]]
 - **Assignee:** {{assignee}}
 - **Priority:** {{priority}}
+- **URL:** {{url}}
 
 ## Comments
 <!-- Appended by comment mode -->

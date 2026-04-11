@@ -16,7 +16,18 @@ Read the following files to understand current state:
 - `repos.md` — available repositories
 - `ARCHITECTURE.md` — system context
 
-### 2. Interview the User
+### 2. Check for Ticket Reference
+
+If the user's message contains what looks like a ticket number (e.g., "BACK-123", "ENG-456"), check `notes/tickets/` for a cached note matching that key. Look for any file matching `*-<KEY>.md` (e.g., `linear-BACK-123.md`, `jira-BACK-123.md`).
+
+**If a cached ticket is found:** read its frontmatter and use the ticket's `title`, `project`, and `work_stream` to pre-populate the task context. The user can still override any pre-populated values.
+
+**If no cached ticket is found:** warn the user and offer to continue:
+> No cached ticket found for `<KEY>`. You can run `/linear` or `/jira` to look it up and pre-populate context, or I can continue without it.
+
+If the user chooses to continue, proceed to the Interview step with no pre-populated values. If the user wants to look it up first, stop and let them run the lookup skill.
+
+### 3. Interview the User
 
 If the user provided a task description in their message, use it. Otherwise, ask:
 - "What's the task?"
@@ -29,7 +40,7 @@ Then, present the active work streams and ask:
 
 Use structured questions where appropriate.
 
-### 3. Create/Update Files
+### 4. Create/Update Files
 
 Follow the conventions in `vault-conventions.md`, `workstream-format.md`, and `daily-log-format.md`.
 
@@ -51,7 +62,7 @@ Follow the conventions in `vault-conventions.md`, `workstream-format.md`, and `d
    - **HH:MM** — [new-task] Created task "Task Name" in [[Work Stream Name]]
    ```
 
-### 4. Summarize
+### 5. Summarize
 
 Tell the user what was created:
 - The todo entry and which work stream it's in
