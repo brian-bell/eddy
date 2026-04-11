@@ -61,6 +61,7 @@ Created 2 review feedback todos in notes/todos/
 | `/eddy-setup` | Interactive onboarding wizard for vault configuration |
 | `/architecture` | Build/update the system architecture doc via interview |
 | `/jira` | Find, create, or check status of Jira tickets ([setup required](#jira)) |
+| `/linear` | Find, create, or check status of Linear tickets ([setup required](#linear)) |
 
 ## Prerequisites
 
@@ -105,3 +106,14 @@ The `/jira` skill lets you find, create, and track Jira tickets from within Eddy
 To enable Jira integration:
 1. Install [acli](https://bobswift.atlassian.net/wiki/spaces/ACLI/overview) (Atlassian CLI) and configure authentication
 2. Fill in the Jira section under "Optional Integrations" in `config.md`
+
+### Linear
+
+The `/linear` skill lets you find, create, and track Linear tickets from within Eddy. Tickets are cached as vault notes under `notes/tickets/` so other skills (`/daily-plan`, `/whats-next`, `/recap`) can surface them alongside Jira.
+
+Choose one of two backends:
+
+- **linearis CLI** (default) — install with `npm install -g linearis`, then run `linearis auth login`. See [linearis-oss/linearis](https://github.com/linearis-oss/linearis).
+- **Linear MCP server** — run `claude mcp add --transport http linear-server https://mcp.linear.app/mcp` and authenticate.
+
+Then fill in the Linear section under "Optional Integrations" in `config.md` (Default Team and Backend).

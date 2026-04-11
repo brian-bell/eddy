@@ -57,4 +57,5 @@ All skills MUST follow the conventions in `.claude/skills/vault-conventions.md` 
 See also:
 - `.claude/skills/daily-log-format.md` — Daily log conventions
 - `.claude/skills/workstream-format.md` — Work stream conventions
+- `.claude/skills/ticket-format.md` — Unified ticket schema (Jira, Linear)
 - `.claude/skills/config-format.md` — How to parse config.md
