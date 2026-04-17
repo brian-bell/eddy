@@ -34,9 +34,9 @@ When a skill performs an action, append a timestamped entry to the **Activity Lo
 Examples:
 
 ```markdown
-- **09:15** — [new-task] Created task "Fix auth timeout" in [[Error Handling Overhaul]] → [[error-handling-overhaul]]
+- **09:15** — [new-task] Started "fix-auth-timeout" with repos: backflow, graphql-edge-workers → [[error-handling-overhaul]]
 - **09:30** — [ingest] Captured Slack message from @alice re: auth errors → [[2026-04-04-auth-error-discussion]]
-- **10:00** — [start-coding] Started coding task "fix-auth-timeout" with repos: backflow, graphql-edge-workers
+- **10:00** — [new-task] Created "draft-rollout-message" (output: draft message) → [[platform-rollout]]
 - **14:00** — [my-prs] Updated PR [[backflow-142]] — 2 review comments addressed, 1 remaining
 ```
 
@@ -47,8 +47,8 @@ Use these prefixes in brackets:
 | Prefix | Skill |
 |--------|-------|
 | `new-task` | /new-task |
+| `complete-task` | task completion workflow (see `notes/templates/task.md`) |
 | `ingest` | /ingest |
-| `start-coding` | /start-coding |
 | `my-prs` | /my-prs |
 | `review-prs` | /review-prs |
 | `jira` | /jira |

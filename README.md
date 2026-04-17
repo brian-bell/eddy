@@ -28,12 +28,11 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 - **`/whats-next`** — Prioritized next actions across all sources
 
 ### Capture
-- **`/new-task`** — New task → categorize into work stream + todos
+- **`/new-task`** — Start a task against a work stream — scaffolds a coding folder (clones repos + CLAUDE.md/AGENTS.md) by default; non-coding captures the output type
 - **`/ingest`** — Drop Slack/email/meeting notes into the vault
 - **`/idea`** — Quick idea capture with auto-metadata
 
 ### Code & Ship
-- **`/start-coding`** — Clone repo into task folder with scaffolding
 - **`/commit`** / **`/ship`** — Commit / push + open PR
 - **`/rebase`** — Rebase on main, resolve conflicts
 - **`/my-prs`** — Your PRs: status, review feedback, conflicts
