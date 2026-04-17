@@ -108,12 +108,34 @@ After generating the ranked list, check if any ideas relate to the surfaced work
 - If no ideas are relevant, do not show this section at all
 - Keep it brief — title and related stream link, nothing more
 
-### 5. Offer Actions
+### 5. Today's Wins (momentum footer)
+
+After the prioritized items (and any Idea Sparks), append a brief **Today's Wins** section that surfaces what the user already finished today. This is for momentum, not ranking — it lives at the very bottom and stays small.
+
+1. Read `notes/todos/completed.md` and find the `## YYYY-MM-DD` heading for today.
+2. Collect the `- [x]` lines under it (until the next `## ` heading). If the heading doesn't exist, skip the section entirely.
+3. Render the count and up to the top 3 items (most recently appended — i.e., the ones at the top of today's section):
+
+```
+### Today's Wins
+4 completed today
+- ✓ Audit timeout paths in backflow ([[Error Handling Overhaul]])
+- ✓ Document retry policy ([[Error Handling Overhaul]])
+- ✓ Land Linear ticket parity ([[Eddy Development]])
+```
+
+Rules:
+- ONLY today's section. Do not pull from earlier days.
+- If today's section is empty or missing, omit the entire footer.
+- Keep it to count + at most 3 items. Strip the inline fields when rendering — show description and `[[workstream]]` only.
+- Do not score or rank these — they're already done.
+
+### 6. Offer Actions
 
 After presenting the list, ask:
 - "Want to start on any of these? I can help with PR feedback, task setup, or Jira updates."
 
-### 6. Update Daily Log
+### 7. Update Daily Log
 
 Append to `notes/daily/YYYY-MM-DD.md`:
 ```

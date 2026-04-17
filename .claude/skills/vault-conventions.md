@@ -73,6 +73,7 @@ Every skill that creates or modifies vault data MUST append a summary entry to t
 - Ticket notes: `<system>-<KEY>.md` (e.g., `jira-BACK-1234.md`)
 - Work streams: `<work-stream-name>.md` (e.g., `error-handling-overhaul.md`)
 - Todos: a single running list at `notes/todos/running.md` (no per-stream todo files)
+- Completed todos: archived in `notes/todos/completed.md`, organized by `## YYYY-MM-DD` headings (newest first)
 - Recaps: `YYYY-MM-DD.md` for daily, `week-YYYY-WW.md` for weekly
 
 ## Running Todo List
@@ -92,7 +93,7 @@ All open todos live in one file, `notes/todos/running.md`. Each item is a Markdo
 | `due` | optional | ISO date (YYYY-MM-DD) by which the item should be done. If omitted, the item is always eligible for today's plan (no deadline). |
 | `source` | optional | Origin of the item: `help-request`, `followup`, `meeting-action`, `self`. Populated fully in Phase B1 — omit if unknown for now. |
 | `stakeholder` | optional | `@handle` of the person the item primarily serves (requester for help-requests, attendee for meeting actions, etc.) |
-| `completed` | on completion | ISO date when the checkbox is ticked. Append to the same trailing segment. |
+| `completed` | on completion | ISO date when the checkbox is ticked. Append to the same trailing segment, then move the line into `completed.md` (see "Completing items"). |
 
 ### Rules
 
@@ -101,9 +102,42 @@ All open todos live in one file, `notes/todos/running.md`. Each item is a Markdo
 - Put `[[wikilinks]]` and `#tags` in the description portion, not the fields.
 - Skills that add items MUST populate `workstream` and `added` at minimum.
 
+### Completing items
+
+Completion is conversational — the user says "I finished X" / "wrapped up Y" and the agent:
+
+1. Finds the matching `- [ ]` line in `notes/todos/running.md`.
+2. Flips the box to `- [x]` and appends ` | completed: YYYY-MM-DD` (today, unless the user gave a different date).
+3. Removes that line from `running.md`.
+4. Appends it to `notes/todos/completed.md` under a `## YYYY-MM-DD` heading for today, creating that heading at the top of the file if it doesn't already exist (newest day first).
+5. Writes the standard `[complete-todo]` action entry to today's daily log.
+
+Completed items NEVER linger in `running.md`. The move is immediate, not a deferred sweep. If a user manually flips a `[ ]` to `[x]` in `running.md` (in their editor) without telling the agent, the next skill that reads `running.md` should treat any `[x]` lines it finds there as stragglers and migrate them on encounter.
+
 ### Snoozing
 
 To snooze an item, edit its `due` field to a later date. That's the whole mechanism — there is no separate snooze state. An item with `due: 2026-04-20` is simply not eligible for today's plan until that date arrives (see `/daily-plan` for the filtering rules). To defer indefinitely, remove the `due` field — but note that undated items are always eligible; if you want to hide something from the active plan, push the `due` date out instead.
+
+## Completed Todos Archive
+
+Completed running-list items live in `notes/todos/completed.md`. The file is grouped by completion date — one `## YYYY-MM-DD` heading per day, newest first, each followed by the `- [x]` lines that completed on that date:
+
+```markdown
+## 2026-04-17
+- [x] Audit timeout paths in backflow [[backflow-142]] — workstream: error-handling-overhaul | added: 2026-03-28 | completed: 2026-04-17
+- [x] Document retry policy — workstream: error-handling-overhaul | added: 2026-04-02 | completed: 2026-04-17
+
+## 2026-04-15
+- [x] Land Linear ticket parity — workstream: eddy-development | added: 2026-04-08 | completed: 2026-04-15
+```
+
+Rules:
+
+- Each item keeps its full pipe-separated field set; `completed: YYYY-MM-DD` matches the heading it sits under.
+- Insert new completions at the TOP of the relevant day's section (most recent completion first within a day).
+- If today's heading doesn't exist yet, add it as the new top section before any older days.
+- Never reorder existing days; just prepend.
+- Skills only write to this file in two cases: (a) the user marks a running-list item complete, or (b) a skill encounters a straggler `[x]` line in `running.md` and migrates it here per the "Completing items" rules. `/recap` and `/whats-next` otherwise read it as context.
 
 ## Work Stream Sovereignty
 
