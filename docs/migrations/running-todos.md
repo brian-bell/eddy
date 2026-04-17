@@ -7,6 +7,7 @@ If you started using Eddy before this change, your vault has per-work-stream tod
 - **Todos:** every per-stream file (`notes/todos/<stream>.md`) is replaced by one running list at `notes/todos/running.md`. Each item carries its workstream (and other context) inline.
 - **Work streams:** `## Tasks` stays, but is now populated ONLY by `/start-coding` (a historical log of coding tasks kicked off against the stream). `## Notes` stays. A new `## Links & Context` section is added for screenshots, decision docs, and external pointers.
 - **Skills:** `/start-coding` no longer creates running-list todos — it still appends a line to the work stream's `## Tasks` section. `/ingest` now proposes todo items interactively instead of silently writing them.
+- **Due dates + snooze:** items now take an optional `due: YYYY-MM-DD` field. `/daily-plan` includes items due today, overdue items, and undated items; items due in the next 2 days appear in a "Coming Up" section; items due further out are hidden until their window arrives. Snooze by editing `due` to a later date — there is no separate snooze state. You do not need to backfill `due` during migration; leaving it off means the item stays eligible every day.
 
 See [ROADMAP.md](../../ROADMAP.md) for the rationale.
 

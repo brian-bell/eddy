@@ -54,6 +54,7 @@ Follow the conventions in `vault-conventions.md`, `workstream-format.md`, and `d
    - [ ] Task description [[related-note]] — workstream: <work-stream-name> | added: YYYY-MM-DD
    ```
    - Always populate `workstream` and `added`.
+   - Add ` | due: YYYY-MM-DD` if the user stated a due date, mentioned "by <date>", referenced a deadline in the task description, or the task ties to a meeting / ticket with a known date. If unclear, ask: "Is there a due date? (blank to skip)". Leave `due` out when undated — undated items stay eligible for today's plan every day.
    - Add ` | stakeholder: @person` when the task description identifies a specific person being helped.
    - Omit `source` in Phase A — it is populated later (Phase B1).
    - Do not write into the work stream file's body.
