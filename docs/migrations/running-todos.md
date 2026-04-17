@@ -8,6 +8,11 @@ If you started using Eddy before this change, your vault has per-work-stream tod
 - **Work streams:** `## Tasks` stays, but is now populated ONLY by `/new-task` (a durable log of tasks kicked off against the stream — coding tasks scaffold a folder, non-coding tasks capture the expected output). `## Notes` stays. A new `## Links & Context` section is added for screenshots, decision docs, and external pointers.
 - **Skills:** `/new-task` and `/start-coding` have been merged into a single `/new-task` (coding mode is the default; the user opts out for non-coding tasks). `/new-task` writes to the work stream's `## Tasks` section — not to `running.md`. `/ingest` now proposes todo items interactively and writes confirmed ones to `running.md`.
 - **Due dates + snooze:** items now take an optional `due: YYYY-MM-DD` field. `/daily-plan` includes items due today, overdue items, and undated items; items due in the next 2 days appear in a "Coming Up" section; items due further out are hidden until their window arrives. Snooze by editing `due` to a later date — there is no separate snooze state. You do not need to backfill `due` during migration; leaving it off means the item stays eligible every day.
+- **Coding-task line format:** lines in a work stream's `## Tasks` section now use a colon after `started` (and optionally `ended`). See [`notes/templates/task.md`](../../notes/templates/task.md) for the full spec.
+  - Open: `- <task-name>: <desc> — started: YYYY-MM-DD`
+  - Completed: `- <task-name>: <desc> — started: YYYY-MM-DD | ended: YYYY-MM-DD`
+  - Completion is conversational — say "I finished <task>" / "wrapped up <task> last Tuesday" and the agent appends `| ended: YYYY-MM-DD` in place. No slash command.
+  - Pre-migration lines in the older `— started YYYY-MM-DD` form (no colon) stay as-is; they're normalized to the colon form only when touched for completion. You do not need to rewrite them.
 
 See [ROADMAP.md](../../ROADMAP.md) for the rationale.
 
@@ -148,6 +153,7 @@ Decided at the 03-27 sync to prioritize backflow first.
 4. Check an item off in `running.md`, add `| completed: YYYY-MM-DD`, then run `/recap daily` — the completion should appear.
 5. Run `/new-task` with a throwaway coding task. Confirm it scaffolds a folder under `<dev-dir>/<task-name>/`, appends one bullet to the matched work stream's `## Tasks` section (`- <task-name>: ... — started: YYYY-MM-DD`), and does NOT write to `running.md`.
 6. Run `/new-task` again with a non-coding task (e.g., "draft a message to the team"). Confirm it asks for an output type, appends one bullet to `## Tasks` with `(output: ...)`, and again does NOT write to `running.md` or create any folder.
+7. Tell the agent "I finished <an open task from step 5>". Confirm it appends `| ended: YYYY-MM-DD` to the matching `## Tasks` line in place, leaves the `started:` date alone, and writes a `[complete-coding-task]` entry to today's daily log.
 
 If any of those fail, `git diff` the migration and look for items that still carry an old trailer (`— added …` without a pipe) or stray per-stream todo files.
 
