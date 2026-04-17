@@ -67,7 +67,7 @@ Part of: <work stream name>
 
 ## References
 - Work stream: `<workflow-repo>/notes/workstreams/<stream>.md`
-- Todos: `<workflow-repo>/notes/todos/<stream>.md`
+- Running todos: `<workflow-repo>/notes/todos/running.md` (filter by `workstream: <stream>`)
 - Daily log: `<workflow-repo>/notes/daily/`
 ```
 
@@ -83,17 +83,7 @@ If `AGENTS.md` already exists and is not a symlink to `CLAUDE.md`, ask the user 
 
 Follow `vault-conventions.md`, `workstream-format.md`, and `daily-log-format.md`.
 
-#### Update work stream todo:
-Add to `notes/todos/<work-stream>.md`:
-```
-- [ ] <task description> (task folder: <task-name>) — added YYYY-MM-DD
-```
-
-#### Update work stream note:
-Add to the Tasks section of `notes/workstreams/<stream>.md`:
-```
-- <task-name>: <brief description> — started YYYY-MM-DD
-```
+`/start-coding` does NOT write to `notes/todos/running.md` or to the work stream file body. It is a scaffolding skill — if the user needs a tracked todo for this task, they can add one with `/new-task`. Use `/start-coding` to match the task to a work stream (read-only), scaffold the task folder, and record the activity in the daily log.
 
 #### Update daily log:
 Append to `notes/daily/YYYY-MM-DD.md`:
@@ -106,7 +96,8 @@ Append to `notes/daily/YYYY-MM-DD.md`:
 Tell the user:
 - Task folder location and what was cloned
 - The `CLAUDE.md` created with context and the `AGENTS.md` symlink pointing to it
-- Vault updates (todo, work stream, daily log)
+- The daily log entry
+- A nudge: "If you want this tracked on the running todo list, run `/new-task`."
 - How to start working: `cd <task-folder>` and launch Claude Code or Codex
 
 ## Important Rules

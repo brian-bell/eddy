@@ -14,8 +14,8 @@ description: "{{description}}"
 - Repos: {{repo_links}}
 - Jira Epic: [[{{jira_epic}}]]
 
-## Tasks
-<!-- Links to task folders and coding sessions -->
-
 ## Notes
-<!-- Links to relevant squawk items, decisions, context -->
+<!-- Prose: decisions, observations, open questions -->
+
+## Links & Context
+<!-- Pointers: screenshots, decision docs, external references, linked squawk items -->

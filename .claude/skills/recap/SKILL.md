@@ -24,8 +24,8 @@ Check if the user specified "daily" or "weekly" in their message. Default to "da
 - Read `notes/daily/YYYY-MM-DD.md` — all activity log entries
 
 **Completed Todos:**
-- Read all files in `notes/todos/` — find items checked off (`- [x]`) with today's date
-- Use `git diff` on `notes/todos/` to detect newly checked items if dates aren't present
+- Read `notes/todos/running.md` — find items checked off (`- [x]`) whose `completed:` field (or nearby date) matches today.
+- Use `git diff notes/todos/running.md` to detect checkbox flips from `[ ]` to `[x]` since the last commit / start of day.
 
 **PR Activity:**
 - Read files in `notes/prs/` modified today (check file modification time or git diff)

@@ -72,8 +72,33 @@ Every skill that creates or modifies vault data MUST append a summary entry to t
 - PR notes: `<repo>-<number>.md` (e.g., `backflow-142.md`)
 - Ticket notes: `<system>-<KEY>.md` (e.g., `jira-BACK-1234.md`)
 - Work streams: `<work-stream-name>.md` (e.g., `error-handling-overhaul.md`)
-- Todo files: `<work-stream-name>.md` (matches the work stream name)
+- Todos: a single running list at `notes/todos/running.md` (no per-stream todo files)
 - Recaps: `YYYY-MM-DD.md` for daily, `week-YYYY-WW.md` for weekly
+
+## Running Todo List
+
+All open todos live in one file, `notes/todos/running.md`. Each item is a Markdown checkbox line with pipe-separated inline fields after an em-dash:
+
+```markdown
+- [ ] Task description [[optional-link]] — workstream: <name> | source: <type> | added: YYYY-MM-DD | stakeholder: @person
+```
+
+### Item Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `workstream` | yes | Name of the related work stream (must match a file in `notes/workstreams/`) |
+| `added` | yes | ISO date (YYYY-MM-DD) when the item was added |
+| `source` | optional | Origin of the item: `help-request`, `followup`, `meeting-action`, `self`. Populated fully in Phase B1 — omit if unknown for now. |
+| `stakeholder` | optional | `@handle` of the person the item primarily serves (requester for help-requests, attendee for meeting actions, etc.) |
+| `completed` | on completion | ISO date when the checkbox is ticked. Append to the same trailing segment. |
+
+### Rules
+
+- Unknown optional fields are omitted rather than written empty.
+- Keep the task description before the em-dash; fields come after.
+- Put `[[wikilinks]]` and `#tags` in the description portion, not the fields.
+- Skills that add items MUST populate `workstream` and `added` at minimum.
 
 ## Work Stream Sovereignty
 

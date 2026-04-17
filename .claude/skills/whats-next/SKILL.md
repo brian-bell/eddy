@@ -14,8 +14,8 @@ Synthesize all open work across the vault and present a prioritized action list.
 Read across the entire vault:
 
 **Open Todos:**
-- Read all files in `notes/todos/` — collect all unchecked (`- [ ]`) items
-- For each, note: description, work stream, date added, any linked notes
+- Read `notes/todos/running.md` — collect all unchecked (`- [ ]`) items.
+- For each, parse the pipe-separated inline fields (`workstream`, `source`, `added`, `stakeholder`) per `vault-conventions.md`. Use `workstream` for grouping, `source` + `stakeholder` as ranking signals, and `added` for staleness.
 
 **PR Actions:**
 - Read all files in `notes/prs/` — collect:

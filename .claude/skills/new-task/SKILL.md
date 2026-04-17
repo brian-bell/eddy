@@ -46,14 +46,17 @@ Follow the conventions in `vault-conventions.md`, `workstream-format.md`, and `d
 
 #### If a new work stream is needed (and user confirmed):
 1. Create `notes/workstreams/<work-stream-name>.md` using the template from `notes/templates/workstream.md`
-2. Create `notes/todos/<work-stream-name>.md` using the template from `notes/templates/todo.md`
 
 #### Add the todo entry:
-1. Open or create `notes/todos/<work-stream-name>.md`
-2. Add a checkbox item with the task description, wikilinks to related notes, and today's date:
+1. If `notes/todos/running.md` does not exist, create it from `notes/templates/todo.md`.
+2. Append a checkbox item to the end of `running.md` using the pipe-separated field format from `vault-conventions.md`:
    ```
-   - [ ] Task description [[related-note]] — added YYYY-MM-DD
+   - [ ] Task description [[related-note]] — workstream: <work-stream-name> | added: YYYY-MM-DD
    ```
+   - Always populate `workstream` and `added`.
+   - Add ` | stakeholder: @person` when the task description identifies a specific person being helped.
+   - Omit `source` in Phase A — it is populated later (Phase B1).
+   - Do not write into the work stream file's body.
 
 #### Update the daily log:
 1. Open or create `notes/daily/YYYY-MM-DD.md` (use today's date, create from template if needed)

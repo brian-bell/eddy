@@ -35,7 +35,7 @@ The `notes/` directory is an Obsidian vault with these subdirectories:
 | Directory | Purpose |
 |-----------|---------|
 | `notes/daily/` | Daily logs (`YYYY-MM-DD.md`) — the spine of each day |
-| `notes/todos/` | Per-work-stream todo files with checkbox items |
+| `notes/todos/` | Single running todo list at `running.md` with per-item inline fields (`workstream`, `source`, `added`, `stakeholder`) |
 | `notes/prs/` | PR tracking notes with review feedback todos |
 | `notes/tickets/` | Cached ticket notes (Jira, Linear) |
 | `notes/recaps/` | Daily and weekly recap summaries |

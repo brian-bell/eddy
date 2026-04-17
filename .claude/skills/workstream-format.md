@@ -22,12 +22,14 @@ Longer description of what this work stream encompasses and its goals.
 - Jira Epic: [[PROJ-1234]]
 - PRs: <!-- links added as PRs are created -->
 
-## Tasks
-<!-- Links to task folders and coding sessions -->
-
 ## Notes
-<!-- Links to relevant squawk items, decisions, context -->
+<!-- Prose: decisions, observations, open questions -->
+
+## Links & Context
+<!-- Pointers: screenshots, decision docs, external references, linked squawk items -->
 ```
+
+Work streams are a **doc-of-docs**, not a progress tracker. Todos for a work stream live in the single running list at `notes/todos/running.md` (tagged with `workstream: <name>`), NOT in the work stream file itself.
 
 ## Reading Work Streams
 
@@ -45,22 +47,6 @@ When a new task needs to be categorized:
 3. Present the best match(es) to the user
 4. If no good match, suggest creating a new work stream (but NEVER create without user confirmation)
 
-## Todo Files
+## Todos
 
-Each work stream has a corresponding todo file at `notes/todos/<work-stream-name>.md`:
-
-```markdown
----
-work_stream: Work Stream Name
----
-
-# Work Stream Name — Todos
-
-- [ ] Task description [[link-to-related-note]] — added YYYY-MM-DD
-- [x] Completed task description — completed YYYY-MM-DD
-```
-
-When adding a todo, always include:
-- A clear task description
-- Wikilinks to related notes (squawk items, PRs, Jira tickets)
-- The date it was added
+All open todos across all work streams live in a single running list at `notes/todos/running.md`. Per-work-stream todo files are not used. See the "Running Todo List" section in `vault-conventions.md` for the item format and required fields.

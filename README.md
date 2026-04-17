@@ -53,7 +53,7 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 | Dir | What lives here |
 |---|---|
 | `daily/` | `YYYY-MM-DD.md` — spine of each day |
-| `todos/` | Per-work-stream checkbox files |
+| `todos/` | Single `running.md` with inline fields per item |
 | `prs/` | PR notes + review feedback todos |
 | `tickets/` | Cached Jira/Linear tickets |
 | `squawk/` | Ingested Slack/email/meeting notes |
@@ -72,3 +72,6 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 - `config.md` — GitHub user, prefs, integrations
 - `repos.md` — Repo registry
 - `ARCHITECTURE.md` — System overview
+
+### Upgrading an existing vault
+See [docs/migrations/](docs/migrations/) for guides covering schema changes. Most recent: [running-todos](docs/migrations/running-todos.md) — single running todo list + work streams as doc-of-docs.

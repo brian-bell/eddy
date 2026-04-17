@@ -28,8 +28,8 @@ Parse the pasted calendar to identify:
 Read across the vault to build a picture of what's pending:
 
 **Todos:**
-- Read all files in `notes/todos/` — collect unchecked (`- [ ]`) items
-- Note which work stream each belongs to
+- Read `notes/todos/running.md` — collect unchecked (`- [ ]`) items.
+- For each item, parse the pipe-separated inline fields after the em-dash (`workstream`, `source`, `added`, `stakeholder`) per `vault-conventions.md`. Group / sort by `workstream` and use `source` and `stakeholder` to inform priority.
 
 **PR Actions:**
 - Read all files in `notes/prs/` — collect PRs with unchecked review feedback items
