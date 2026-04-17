@@ -14,6 +14,13 @@ description: "{{description}}"
 - Repos: {{repo_links}}
 - Jira Epic: [[{{jira_epic}}]]
 
+## Tasks
+<!--
+Coding tasks started against this stream. See notes/templates/task.md for the line format and completion flow.
+  - <task-name>: <brief description> — started: YYYY-MM-DD
+  - <task-name>: <brief description> — started: YYYY-MM-DD | ended: YYYY-MM-DD
+-->
+
 ## Notes
 <!-- Prose: decisions, observations, open questions -->
 
