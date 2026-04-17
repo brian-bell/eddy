@@ -69,9 +69,10 @@ If the content contains action items, do **not** write them yet. First, propose 
 
 1. Extract each candidate action item from the content. For each one, draft a proposed line with inferred fields:
    ```
-   - [ ] <action description> [[YYYY-MM-DD-short-slug]] — workstream: <inferred> | source: help-request | added: YYYY-MM-DD | stakeholder: @<sender-if-known>
+   - [ ] <action description> [[YYYY-MM-DD-short-slug]] — workstream: <inferred> | source: help-request | added: YYYY-MM-DD | due: YYYY-MM-DD | stakeholder: @<sender-if-known>
    ```
    - `source` defaults to `help-request` for asks from other people, `followup` for things you owe back, `meeting-action` when the squawk is meeting-sourced, `self` when you're capturing your own thought. Omit if unclear.
+   - `due` is inferred only when the content states an explicit deadline ("by Friday", "end of week", an ISO date, a ticket with a due date). Resolve relative phrases against today. Leave out when no deadline is mentioned — undated items stay eligible every day.
    - `stakeholder` is the person being helped / the requester. Omit if unclear.
 2. Present the list to the user and ask them to:
    - confirm each item as-is,

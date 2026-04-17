@@ -80,7 +80,7 @@ Every skill that creates or modifies vault data MUST append a summary entry to t
 All open todos live in one file, `notes/todos/running.md`. Each item is a Markdown checkbox line with pipe-separated inline fields after an em-dash:
 
 ```markdown
-- [ ] Task description [[optional-link]] — workstream: <name> | source: <type> | added: YYYY-MM-DD | stakeholder: @person
+- [ ] Task description [[optional-link]] — workstream: <name> | source: <type> | added: YYYY-MM-DD | due: YYYY-MM-DD | stakeholder: @person
 ```
 
 ### Item Fields
@@ -89,6 +89,7 @@ All open todos live in one file, `notes/todos/running.md`. Each item is a Markdo
 |-------|----------|-------------|
 | `workstream` | yes | Name of the related work stream (must match a file in `notes/workstreams/`) |
 | `added` | yes | ISO date (YYYY-MM-DD) when the item was added |
+| `due` | optional | ISO date (YYYY-MM-DD) by which the item should be done. If omitted, the item is always eligible for today's plan (no deadline). |
 | `source` | optional | Origin of the item: `help-request`, `followup`, `meeting-action`, `self`. Populated fully in Phase B1 — omit if unknown for now. |
 | `stakeholder` | optional | `@handle` of the person the item primarily serves (requester for help-requests, attendee for meeting actions, etc.) |
 | `completed` | on completion | ISO date when the checkbox is ticked. Append to the same trailing segment. |
@@ -99,6 +100,10 @@ All open todos live in one file, `notes/todos/running.md`. Each item is a Markdo
 - Keep the task description before the em-dash; fields come after.
 - Put `[[wikilinks]]` and `#tags` in the description portion, not the fields.
 - Skills that add items MUST populate `workstream` and `added` at minimum.
+
+### Snoozing
+
+To snooze an item, edit its `due` field to a later date. That's the whole mechanism — there is no separate snooze state. An item with `due: 2026-04-20` is simply not eligible for today's plan until that date arrives (see `/daily-plan` for the filtering rules). To defer indefinitely, remove the `due` field — but note that undated items are always eligible; if you want to hide something from the active plan, push the `due` date out instead.
 
 ## Work Stream Sovereignty
 

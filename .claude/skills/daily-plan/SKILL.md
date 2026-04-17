@@ -29,7 +29,12 @@ Read across the vault to build a picture of what's pending:
 
 **Todos:**
 - Read `notes/todos/running.md` — collect unchecked (`- [ ]`) items.
-- For each item, parse the pipe-separated inline fields after the em-dash (`workstream`, `source`, `added`, `stakeholder`) per `vault-conventions.md`. Group / sort by `workstream` and use `source` and `stakeholder` to inform priority.
+- For each item, parse the pipe-separated inline fields after the em-dash (`workstream`, `source`, `added`, `due`, `stakeholder`) per `vault-conventions.md`.
+- Filter by `due` relative to today:
+  - **Include in today's plan:** items where `due` is today, items where `due` is before today (overdue), and items with no `due` field at all (undated items are always eligible).
+  - **Include in a "Coming up" section (not today's plan):** items where `due` is within the next 2 days (today+1 or today+2).
+  - **Exclude entirely:** items where `due` is more than 2 days out. These are effectively snoozed — surface them again when their window arrives.
+- Group / sort the eligible items by `workstream` and use `source` and `stakeholder` to inform priority. Flag overdue items prominently.
 
 **PR Actions:**
 - Read all files in `notes/prs/` — collect PRs with unchecked review feedback items
@@ -66,19 +71,23 @@ Calculate available focus time from the calendar. Then propose a prioritized pla
 ### Priorities
 1. **[PR] Address review feedback on backflow#142** (30 min)
    Why: Changes requested 2 days ago, blocking merge
-   
-2. **[Jira] BACK-1235 — Add timeout handling** (2 hours)
-   Why: In progress, assigned to you, blocks QA
-   
-3. **[Todo] Update error documentation** (1 hour)
-   Why: Part of Error Handling Overhaul, due this week
 
-4. **[Squawk] Respond to Alice's auth question** (15 min)
-   Why: Decision needed, ingested yesterday
+2. **[Todo] Ship retry policy doc** (1 hour) ⚠ OVERDUE
+   Why: Due 2026-04-14, still open — 2 days past
+
+3. **[Todo] Review Alice's auth RFC** (45 min) · due today
+   Why: Decision needed by EOD
+
+4. **[Todo] Update error documentation** (1 hour)
+   Why: No due date — steady progress on Error Handling Overhaul
 
 ### If Time Permits
 5. **[Todo] Explore WTUI color system** (1 hour)
-   Why: Design review tomorrow, helpful to have context
+   Why: Undated; design review prep
+
+### Coming Up (next 2 days)
+- **[Todo] Finalize Q2 roadmap** — due tomorrow (2026-04-17)
+- **[Todo] Prep for BACK-1240 review** — due 2026-04-18
 ```
 
 ### 5. Interview to Adjust
@@ -106,5 +115,9 @@ Print the final plan to the terminal.
 - Estimate time for each item based on complexity
 - Always explain WHY each item is prioritized (age, blocking, urgency, deadlines)
 - Include an "If Time Permits" section for lower-priority items
+- Include a **"Coming Up"** section listing items with `due` in the next 2 days (today+1, today+2) — these are not scheduled for today but the user should see them approaching. Omit the section if nothing qualifies.
+- Items with `due` more than 2 days out are excluded entirely — they're effectively snoozed until their window arrives. Users can adjust by editing the item's `due` field (see `vault-conventions.md` "Snoozing").
+- Undated items (no `due` field) are always eligible for today's plan; rank them by the usual signals.
+- Flag overdue items (`due` before today, still unchecked) prominently — e.g., ⚠ OVERDUE — and rank them at the top of Priorities.
 - Carry over unfinished items from yesterday's plan if applicable
 - Don't overwhelm — prioritize ruthlessly based on available focus time
