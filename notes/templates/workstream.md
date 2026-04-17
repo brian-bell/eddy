@@ -16,8 +16,9 @@ description: "{{description}}"
 
 ## Tasks
 <!--
-Coding tasks started against this stream. See notes/templates/task.md for the line format and completion flow.
+Tasks started against this stream (coding and non-coding). See notes/templates/task.md for the line format and completion flow.
   - <task-name>: <brief description> — started: YYYY-MM-DD
+  - <task-name>: <brief description> (output: <artifact-type>) — started: YYYY-MM-DD
   - <task-name>: <brief description> — started: YYYY-MM-DD | ended: YYYY-MM-DD
 -->
 

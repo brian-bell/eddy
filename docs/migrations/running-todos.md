@@ -5,8 +5,8 @@ If you started using Eddy before this change, your vault has per-work-stream tod
 ## What changed
 
 - **Todos:** every per-stream file (`notes/todos/<stream>.md`) is replaced by one running list at `notes/todos/running.md`. Each item carries its workstream (and other context) inline.
-- **Work streams:** `## Tasks` stays, but is now populated ONLY by `/start-coding` (a historical log of coding tasks kicked off against the stream). `## Notes` stays. A new `## Links & Context` section is added for screenshots, decision docs, and external pointers.
-- **Skills:** `/start-coding` no longer creates running-list todos — it still appends a line to the work stream's `## Tasks` section. `/ingest` now proposes todo items interactively instead of silently writing them.
+- **Work streams:** `## Tasks` stays, but is now populated ONLY by `/new-task` (a durable log of tasks kicked off against the stream — coding tasks scaffold a folder, non-coding tasks capture the expected output). `## Notes` stays. A new `## Links & Context` section is added for screenshots, decision docs, and external pointers.
+- **Skills:** `/new-task` and `/start-coding` have been merged into a single `/new-task` (coding mode is the default; the user opts out for non-coding tasks). `/new-task` writes to the work stream's `## Tasks` section — not to `running.md`. `/ingest` now proposes todo items interactively and writes confirmed ones to `running.md`.
 - **Due dates + snooze:** items now take an optional `due: YYYY-MM-DD` field. `/daily-plan` includes items due today, overdue items, and undated items; items due in the next 2 days appear in a "Coming Up" section; items due further out are hidden until their window arrives. Snooze by editing `due` to a later date — there is no separate snooze state. You do not need to backfill `due` during migration; leaving it off means the item stays eligible every day.
 
 See [ROADMAP.md](../../ROADMAP.md) for the rationale.
@@ -106,7 +106,7 @@ Do this per stream; keep `notes/todos/.gitkeep` if it exists.
 
 For every `notes/workstreams/<stream>.md`:
 
-1. Keep `## Description`, `## Related`, `## Tasks`, and `## Notes` as they are. `## Tasks` is still a valid section — `/start-coding` writes to it each time a coding task is kicked off. Do NOT edit existing `## Tasks` lines by hand; leave them alone as historical records.
+1. Keep `## Description`, `## Related`, `## Tasks`, and `## Notes` as they are. `## Tasks` is still a valid section — `/new-task` writes to it each time a task is kicked off (coding or non-coding). Do NOT edit existing `## Tasks` lines by hand; leave them alone as historical records.
 2. Add `## Links & Context` at the bottom if it isn't already there, even if empty — future ingests and decision docs will land there. Put it AFTER `## Notes`.
 
 **Before:**
@@ -146,8 +146,8 @@ Decided at the 03-27 sync to prioritize backflow first.
 2. Run `/whats-next`. It should read `running.md`, parse inline fields, and group by workstream without errors.
 3. Run `/daily-plan`. Same expectation — items come from `running.md`.
 4. Check an item off in `running.md`, add `| completed: YYYY-MM-DD`, then run `/recap daily` — the completion should appear.
-5. Run `/new-task` with a throwaway task. Confirm it appends one line to `running.md` and does not create a per-stream file or edit a work stream body.
-6. Run `/start-coding` against a work stream. Confirm it appends a new bullet to that work stream's `## Tasks` section and does NOT write to `running.md`.
+5. Run `/new-task` with a throwaway coding task. Confirm it scaffolds a folder under `<dev-dir>/<task-name>/`, appends one bullet to the matched work stream's `## Tasks` section (`- <task-name>: ... — started: YYYY-MM-DD`), and does NOT write to `running.md`.
+6. Run `/new-task` again with a non-coding task (e.g., "draft a message to the team"). Confirm it asks for an output type, appends one bullet to `## Tasks` with `(output: ...)`, and again does NOT write to `running.md` or create any folder.
 
 If any of those fail, `git diff` the migration and look for items that still carry an old trailer (`— added …` without a pipe) or stray per-stream todo files.
 

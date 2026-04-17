@@ -8,8 +8,7 @@ A second memory that combines an Obsidian knowledge vault with workflow skills f
 
 | Command | Description |
 |---------|-------------|
-| `/new-task` | Create and categorize a new task into work streams |
-| `/start-coding` | Clone repos into a task folder with full scaffolding |
+| `/new-task` | Start a task against a work stream — scaffolds a coding folder (clones repos + CLAUDE.md/AGENTS.md) by default; non-coding captures the output type |
 | `/ingest` | Categorize pasted Slack/email/info into vault notes |
 | `/my-prs` | Manage your authored PRs with review feedback todos |
 | `/review-prs` | List PRs awaiting your review action |
