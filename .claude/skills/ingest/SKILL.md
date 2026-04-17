@@ -63,15 +63,26 @@ work_stream: <matched work stream or empty>
 Add `[[wikilinks]]` throughout the note body to related work streams, repos, people, and other notes.
 Add `#tags` in the note body for visual filtering.
 
-### 4. Create Todos (if actionable)
+### 4. Propose Todos (if actionable)
 
-If the content contains action items:
-1. Identify the relevant work stream's todo file (`notes/todos/<work-stream>.md`)
-2. Add checkbox entries with wikilinks back to the squawk note:
+If the content contains action items, do **not** write them yet. First, propose them interactively so the user can shape the wording and granularity:
+
+1. Extract each candidate action item from the content. For each one, draft a proposed line with inferred fields:
    ```
-   - [ ] Action description [[YYYY-MM-DD-short-slug]] — added YYYY-MM-DD
+   - [ ] <action description> [[YYYY-MM-DD-short-slug]] — workstream: <inferred> | source: help-request | added: YYYY-MM-DD | due: YYYY-MM-DD | stakeholder: @<sender-if-known>
    ```
-3. If the content doesn't fit a specific work stream, add to a general todo file or ask the user which stream to assign it to.
+   - `source` defaults to `help-request` for asks from other people, `followup` for things you owe back, `meeting-action` when the squawk is meeting-sourced, `self` when you're capturing your own thought. Omit if unclear.
+   - `due` is inferred only when the content states an explicit deadline ("by Friday", "end of week", an ISO date, a ticket with a due date). Resolve relative phrases against today. Leave out when no deadline is mentioned — undated items stay eligible every day.
+   - `stakeholder` is the person being helped / the requester. Omit if unclear.
+2. Present the list to the user and ask them to:
+   - confirm each item as-is,
+   - edit the description, workstream, or fields,
+   - merge/split items,
+   - or drop any item that isn't really actionable.
+3. Only after the user confirms, append the accepted items to `notes/todos/running.md` (create from `notes/templates/todo.md` if the file does not yet exist).
+4. If the content has no action items, skip this step entirely.
+
+Never silently write action items. The point of this step is letting the user control wording and granularity.
 
 ### 5. Update Daily Log
 

@@ -8,8 +8,7 @@ A second memory that combines an Obsidian knowledge vault with workflow skills f
 
 | Command | Description |
 |---------|-------------|
-| `/new-task` | Create and categorize a new task into work streams |
-| `/start-coding` | Clone repos into a task folder with full scaffolding |
+| `/new-task` | Start a task against a work stream — scaffolds a coding folder (clones repos + CLAUDE.md/AGENTS.md) by default; non-coding captures the output type |
 | `/ingest` | Categorize pasted Slack/email/info into vault notes |
 | `/my-prs` | Manage your authored PRs with review feedback todos |
 | `/review-prs` | List PRs awaiting your review action |
@@ -35,7 +34,7 @@ The `notes/` directory is an Obsidian vault with these subdirectories:
 | Directory | Purpose |
 |-----------|---------|
 | `notes/daily/` | Daily logs (`YYYY-MM-DD.md`) — the spine of each day |
-| `notes/todos/` | Per-work-stream todo files with checkbox items |
+| `notes/todos/` | Single running todo list at `running.md` with per-item inline fields (`workstream`, `source`, `added`, `due`, `stakeholder`) |
 | `notes/prs/` | PR tracking notes with review feedback todos |
 | `notes/tickets/` | Cached ticket notes (Jira, Linear) |
 | `notes/recaps/` | Daily and weekly recap summaries |

@@ -24,8 +24,8 @@ Check if the user specified "daily" or "weekly" in their message. Default to "da
 - Read `notes/daily/YYYY-MM-DD.md` — all activity log entries
 
 **Completed Todos:**
-- Read all files in `notes/todos/` — find items checked off (`- [x]`) with today's date
-- Use `git diff` on `notes/todos/` to detect newly checked items if dates aren't present
+- Read `notes/todos/completed.md` — find the `## YYYY-MM-DD` heading for today and collect every `- [x]` line under it (until the next `## ` heading). Each line carries inline fields (`workstream`, `added`, `completed`, …); use `workstream` for grouping in the recap.
+- If `notes/todos/running.md` contains stray `- [x]` lines (manual checkbox flips not yet migrated), include those whose `completed:` field matches today and migrate them into `completed.md` as part of this pass per `vault-conventions.md`.
 
 **PR Activity:**
 - Read files in `notes/prs/` modified today (check file modification time or git diff)
@@ -45,7 +45,11 @@ Check if the user specified "daily" or "weekly" in their message. Default to "da
 - Read files in `notes/workstreams/` modified today
 
 #### For Weekly Recap:
-Same sources but scan across the week's dates. Use `git log --since` to find modified files.
+
+Same sources, scanned across the week:
+
+- **Completed Todos:** read every `## YYYY-MM-DD` heading in `notes/todos/completed.md` from this week's Monday through today (inclusive). Aggregate the `- [x]` lines under each heading.
+- For other sources (daily logs, PRs, squawk, ideas, tickets, work streams), use `git log --since` to find modified files within the week.
 
 ### 3. Generate Recap
 

@@ -148,7 +148,7 @@ Here's what I'll set up:
 
 🔧 Work stream: error-handling-overhaul
   + notes/workstreams/error-handling-overhaul.md
-  + notes/todos/error-handling-overhaul.md
+  · notes/todos/running.md (seeded if missing)
 
 Confirm? (y/n)
 ```
@@ -221,7 +221,8 @@ Preserve all existing entries in `repos.md` — append new entries at the end. N
 For each work stream the user chose to create:
 
 1. Create `notes/workstreams/{name}.md` from `notes/templates/workstream.md`, filling in the name and description. Leave repo and Jira epic fields as template placeholders.
-2. Create `notes/todos/{name}.md` from `notes/templates/todo.md`, filling in the work stream name.
+
+Ensure a single running todo list exists at `notes/todos/running.md`. If it does not exist, seed it from `notes/templates/todo.md`. There are no per-work-stream todo files.
 
 ### 11. Update Daily Log
 
