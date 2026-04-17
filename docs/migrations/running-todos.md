@@ -16,6 +16,8 @@ If you started using Eddy before this change, your vault has per-work-stream tod
 
 See [ROADMAP.md](../../ROADMAP.md) for the rationale.
 
+> **Note:** completed items have since been split into a separate dated archive at `notes/todos/completed.md`. After finishing this migration, follow [`completed-todos.md`](./completed-todos.md) to move any `- [x]` lines out of `running.md`.
+
 ## Before you start
 
 1. **Commit your vault.** `git add -A && git commit -m "pre running-todos snapshot"` in the vault repo so you can roll back if needed.

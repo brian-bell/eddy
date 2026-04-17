@@ -14,7 +14,9 @@ Format:
 Due date is optional. If omitted, the item is always eligible for today's plan.
 Snooze by editing `due` to a later date.
 
-On completion, append:  | completed: YYYY-MM-DD
+On completion the line is moved immediately out of this file and into
+`notes/todos/completed.md` under a `## YYYY-MM-DD` heading for today.
+Completed items never linger here.
 
 See .claude/skills/vault-conventions.md for the full spec.
 -->
