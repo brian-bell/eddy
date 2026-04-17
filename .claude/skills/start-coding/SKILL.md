@@ -86,11 +86,11 @@ Follow `vault-conventions.md`, `workstream-format.md`, and `daily-log-format.md`
 `/start-coding` does NOT write to `notes/todos/running.md`. If the user wants this task on the running todo list, they can add one with `/new-task`. It DOES append a line to the matched work stream's `## Tasks` section — that section is a historical log of coding tasks started against the stream, and `/start-coding` is the only skill that writes to it.
 
 #### Append to the work stream `## Tasks` section:
-Find the matched work stream file at `notes/workstreams/<stream>.md` and append a bullet to its `## Tasks` section (create the section just above `## Notes` if it is missing — templates written before this change may lack it):
+Find the matched work stream file at `notes/workstreams/<stream>.md` and append a bullet in the open form from `notes/templates/task.md`:
 ```
-- <task-name>: <brief description> — started YYYY-MM-DD
+- <task-name>: <brief description> — started: YYYY-MM-DD
 ```
-Do not touch any other section of the work stream file.
+Create the `## Tasks` section just above `## Notes` if it's missing (work streams created before this change may lack it). No `ended:` field yet — that's appended later when the user reports the task done (see the completion workflow in `notes/templates/task.md`). Do not touch any other section of the work stream file.
 
 #### Update daily log:
 Append to `notes/daily/YYYY-MM-DD.md`:

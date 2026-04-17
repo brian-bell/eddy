@@ -15,7 +15,11 @@ description: "{{description}}"
 - Jira Epic: [[{{jira_epic}}]]
 
 ## Tasks
-<!-- Populated ONLY by /start-coding as coding tasks are kicked off. Do not edit by hand. -->
+<!--
+Coding tasks started against this stream. See notes/templates/task.md for the line format and completion flow.
+  - <task-name>: <brief description> — started: YYYY-MM-DD
+  - <task-name>: <brief description> — started: YYYY-MM-DD | ended: YYYY-MM-DD
+-->
 
 ## Notes
 <!-- Prose: decisions, observations, open questions -->
