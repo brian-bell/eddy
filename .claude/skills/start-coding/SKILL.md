@@ -83,7 +83,14 @@ If `AGENTS.md` already exists and is not a symlink to `CLAUDE.md`, ask the user 
 
 Follow `vault-conventions.md`, `workstream-format.md`, and `daily-log-format.md`.
 
-`/start-coding` does NOT write to `notes/todos/running.md` or to the work stream file body. It is a scaffolding skill — if the user needs a tracked todo for this task, they can add one with `/new-task`. Use `/start-coding` to match the task to a work stream (read-only), scaffold the task folder, and record the activity in the daily log.
+`/start-coding` does NOT write to `notes/todos/running.md`. If the user wants this task on the running todo list, they can add one with `/new-task`. It DOES append a line to the matched work stream's `## Tasks` section — that section is a historical log of coding tasks started against the stream, and `/start-coding` is the only skill that writes to it.
+
+#### Append to the work stream `## Tasks` section:
+Find the matched work stream file at `notes/workstreams/<stream>.md` and append a bullet to its `## Tasks` section (create the section just above `## Notes` if it is missing — templates written before this change may lack it):
+```
+- <task-name>: <brief description> — started YYYY-MM-DD
+```
+Do not touch any other section of the work stream file.
 
 #### Update daily log:
 Append to `notes/daily/YYYY-MM-DD.md`:
@@ -96,8 +103,9 @@ Append to `notes/daily/YYYY-MM-DD.md`:
 Tell the user:
 - Task folder location and what was cloned
 - The `CLAUDE.md` created with context and the `AGENTS.md` symlink pointing to it
+- The work stream `## Tasks` bullet appended (quote the line added)
 - The daily log entry
-- A nudge: "If you want this tracked on the running todo list, run `/new-task`."
+- A nudge: "If you want this tracked on the running todo list too, run `/new-task`."
 - How to start working: `cd <task-folder>` and launch Claude Code or Codex
 
 ## Important Rules

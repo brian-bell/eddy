@@ -22,6 +22,9 @@ Longer description of what this work stream encompasses and its goals.
 - Jira Epic: [[PROJ-1234]]
 - PRs: <!-- links added as PRs are created -->
 
+## Tasks
+<!-- Populated ONLY by /start-coding — a historical log of coding tasks kicked off for this stream. -->
+
 ## Notes
 <!-- Prose: decisions, observations, open questions -->
 
@@ -29,7 +32,7 @@ Longer description of what this work stream encompasses and its goals.
 <!-- Pointers: screenshots, decision docs, external references, linked squawk items -->
 ```
 
-Work streams are a **doc-of-docs**, not a progress tracker. Todos for a work stream live in the single running list at `notes/todos/running.md` (tagged with `workstream: <name>`), NOT in the work stream file itself.
+Work streams are a **doc-of-docs**, not a progress tracker. Day-to-day todos live in the single running list at `notes/todos/running.md` (tagged with `workstream: <name>`), NOT in the work stream file itself. The `## Tasks` section is the one exception: `/start-coding` appends a bullet there each time a coding task folder is scaffolded, giving the stream a durable record of the coding sessions that contributed to it. No other skill writes to `## Tasks`.
 
 ## Reading Work Streams
 
