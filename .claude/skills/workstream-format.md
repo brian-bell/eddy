@@ -23,7 +23,11 @@ Longer description of what this work stream encompasses and its goals.
 - PRs: <!-- links added as PRs are created -->
 
 ## Tasks
-<!-- Populated ONLY by /start-coding — a historical log of coding tasks kicked off for this stream. -->
+<!--
+Coding tasks for this stream. See notes/templates/task.md.
+  - <task-name>: <brief description> — started: YYYY-MM-DD
+  - <task-name>: <brief description> — started: YYYY-MM-DD | ended: YYYY-MM-DD
+-->
 
 ## Notes
 <!-- Prose: decisions, observations, open questions -->
@@ -32,7 +36,16 @@ Longer description of what this work stream encompasses and its goals.
 <!-- Pointers: screenshots, decision docs, external references, linked squawk items -->
 ```
 
-Work streams are a **doc-of-docs**, not a progress tracker. Day-to-day todos live in the single running list at `notes/todos/running.md` (tagged with `workstream: <name>`), NOT in the work stream file itself. The `## Tasks` section is the one exception: `/start-coding` appends a bullet there each time a coding task folder is scaffolded, giving the stream a durable record of the coding sessions that contributed to it. No other skill writes to `## Tasks`.
+Work streams are a **doc-of-docs**, not a progress tracker. Day-to-day todos live in the single running list at `notes/todos/running.md` (tagged with `workstream: <name>`), NOT in the work stream file itself. The `## Tasks` section is the one exception: `/start-coding` appends a bullet there each time a coding task folder is scaffolded, giving the stream a durable record of the coding sessions that contributed to it.
+
+### Task line format
+
+Coding-task lines follow the template at `notes/templates/task.md`. Summary:
+
+- **Open:** `- <task-name>: <brief description> — started: YYYY-MM-DD`
+- **Completed:** `- <task-name>: <brief description> — started: YYYY-MM-DD | ended: YYYY-MM-DD`
+
+`/start-coding` writes the open form. Completion — adding `| ended: YYYY-MM-DD` — happens when the user reports a task done in the chat ("I completed fix-auth-timeout", "wrapped up backflow-audit last Tuesday", etc.). Follow the completion workflow in `notes/templates/task.md` exactly: parse the date phrase, find the matching open bullet, append `| ended: <date>` in place, log it. No skill invocation is required — the template IS the spec.
 
 ## Reading Work Streams
 
