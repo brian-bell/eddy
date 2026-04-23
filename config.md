@@ -7,6 +7,10 @@
 - **Dev Directory:** ~/dev
 - **Default Branch:** main
 
+## Task Journal
+<!-- Controls what the SessionEnd hook (.claude/hooks/session-end.sh) writes into each task folder's JOURNAL.md. -->
+- **Session Summary:** on <!-- on | off. Off → git-delta only; on → also run a 2-3 sentence LLM summary via `claude -p`. -->
+
 ## Optional Integrations
 
 ### Jira

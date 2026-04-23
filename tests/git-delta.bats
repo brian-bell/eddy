@@ -164,3 +164,38 @@ assert names == ['foo'], names
   [ "$status" -eq 0 ]
   echo "$output" | grep -qF "[session]"
 }
+
+@test "render --summary-file inserts summary section above repo changes" {
+  mkrepo foo
+  "$DELTA" collect "$TASK" > /dev/null
+  echo "x" >> "${TASK}/foo/README.md"
+  git -C "${TASK}/foo" commit -q -am "tweak readme"
+
+  json="$("$DELTA" collect "$TASK")"
+  summary_file="$(mktemp)"
+  printf 'Decided to retry with backoff. Left reproducing the staging case for next session.\n' > "$summary_file"
+
+  run bash -c "echo '$json' | '$DELTA' render --summary-file '$summary_file'"
+  [ "$status" -eq 0 ]
+  echo "$output" | grep -qF "**Session summary**"
+  echo "$output" | grep -qF "Decided to retry with backoff."
+  echo "$output" | grep -qF "**Repo changes**"
+  echo "$output" | grep -qF "tweak readme"
+
+  # Summary section appears before the repo changes header.
+  summary_pos=$(echo "$output" | grep -n "Session summary" | head -1 | cut -d: -f1)
+  repo_pos=$(echo "$output" | grep -n "Repo changes" | head -1 | cut -d: -f1)
+  [ "$summary_pos" -lt "$repo_pos" ]
+
+  rm -f "$summary_file"
+}
+
+@test "render --summary-file with empty file behaves like no summary" {
+  json='{"task_folder": "'"$TASK"'", "generated_at": "2026-04-22T00:00:00Z", "repos": []}'
+  empty="$(mktemp)"
+  run bash -c "echo '$json' | '$DELTA' render --summary-file '$empty'"
+  [ "$status" -eq 0 ]
+  echo "$output" | grep -qF "[session]"
+  ! echo "$output" | grep -qF "**Session summary**"
+  rm -f "$empty"
+}
