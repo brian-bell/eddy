@@ -134,13 +134,23 @@ On yes:
    `## Work Stream` line and the folder name), otherwise ask the user.
 2. Copy the template to `./JOURNAL.md`, substituting `{{task}}`,
    `{{workstream}}`, and `{{created}}` (today's date).
-3. Install the `SessionEnd` hook into `./.claude/settings.json` so
-   auto-capture works going forward. Write (merging with any existing
-   file):
+3. Install the `SessionStart` and `SessionEnd` hooks into
+   `./.claude/settings.json` so auto-resume and auto-capture work
+   going forward. Write (merging with any existing file):
 
    ```json
    {
      "hooks": {
+       "SessionStart": [
+         {
+           "hooks": [
+             {
+               "type": "command",
+               "command": "<absolute-workflow-repo>/.claude/hooks/session-start.sh"
+             }
+           ]
+         }
+       ],
        "SessionEnd": [
          {
            "hooks": [
@@ -157,14 +167,11 @@ On yes:
 
    `<absolute-workflow-repo>` is the absolute path to the workflow repo
    (parse it from the task folder's `CLAUDE.md` Workflow Repo line if
-   present, else ask the user). If a SessionEnd hook already exists
-   pointing elsewhere, ask before replacing.
+   present, else ask the user). If a hook entry already points
+   elsewhere, ask before replacing.
 4. Proceed with steps 2–3 as normal.
 
 On no: stop silently.
-
-Slice 5 of PRD #28 will add a `SessionStart` hook alongside this
-install step.
 
 ### 6. Append a daily log entry
 

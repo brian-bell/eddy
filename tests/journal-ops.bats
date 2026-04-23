@@ -147,3 +147,25 @@ not_contains() {
   contains "${WORK}/j.md" "## Log"
   contains "${WORK}/j.md" "Entry."
 }
+
+@test "last-log returns the last N entries including their body" {
+  run "$OPS" last-log "${FIXTURES}/journal-populated.md" 1
+  [ "$status" -eq 0 ]
+  echo "$output" | grep -qF "narrowed to token-refresh"
+  echo "$output" | grep -qF "Confirmed the race is in refresh"
+  # Earlier entry must NOT be in the output.
+  ! echo "$output" | grep -qF "initial exploration"
+}
+
+@test "last-log with N greater than entry count returns all entries" {
+  run "$OPS" last-log "${FIXTURES}/journal-populated.md" 10
+  [ "$status" -eq 0 ]
+  echo "$output" | grep -qF "initial exploration"
+  echo "$output" | grep -qF "narrowed to token-refresh"
+}
+
+@test "last-log on journal with no entries returns empty output" {
+  run "$OPS" last-log "${FIXTURES}/journal-empty-log.md" 3
+  [ "$status" -eq 0 ]
+  [ -z "$output" ]
+}
