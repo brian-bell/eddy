@@ -27,10 +27,12 @@ Add `--print-output-on-failure` to see stdout/stderr from failing cases.
 
 ## Layout
 
-| Path                          | What it covers                                |
-|-------------------------------|-----------------------------------------------|
-| `tests/journal-ops.bats`      | Module A — state rewrite + log append         |
-| `tests/fixtures/`             | Sample `JOURNAL.md` files used by the tests   |
+| Path                          | What it covers                                         |
+|-------------------------------|--------------------------------------------------------|
+| `tests/journal-ops.bats`      | Module A — state rewrite + log append                  |
+| `tests/git-delta.bats`        | Module B — git delta collect + render                  |
+| `tests/session-end.bats`      | Integration — SessionEnd hook end-to-end               |
+| `tests/fixtures/`             | Sample `JOURNAL.md` files used by the tests            |
 
 ## Writing tests
 
