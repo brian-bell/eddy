@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Module A — journal file operations.
 
-Deterministic parse/rewrite of a task-folder JOURNAL.md. Three subcommands:
+Deterministic parse/rewrite of a task-folder JOURNAL.md. Subcommands:
 
   journal-ops.py read-state <path>
-  journal-ops.py write-state <path>   # reads new state from stdin
-  journal-ops.py append-log <path>    # reads log entry from stdin
+  journal-ops.py write-state <path>         # reads new state from stdin
+  journal-ops.py append-log <path>          # reads log entry from stdin
+  journal-ops.py last-log <path> <count>    # prints the last <count> entries
 
 Contract (see notes/templates/journal.md and PRD #28):
   - The state region is the text from the first `## Current State` heading
@@ -95,6 +96,48 @@ def write_state(path: Path, new_state: str) -> None:
     path.write_text(prefix + new_state + log)
 
 
+def split_log_entries(log_text: str) -> list[str]:
+    """Split the ## Log section body into individual entry strings.
+
+    Each entry starts at a `### ` heading. Text before the first `### `
+    (typically the `<!-- Append-only. ... -->` comment + blank line) is
+    discarded; entries returned include their own heading lines.
+    """
+    lines = log_text.splitlines(keepends=True)
+    entries: list[list[str]] = []
+    current: list[str] | None = None
+    seen_heading = False
+    for line in lines:
+        if line.startswith("### "):
+            if current is not None:
+                entries.append(current)
+            current = [line]
+            seen_heading = True
+            continue
+        # Skip the `## Log` heading itself if we encounter it here.
+        if line.rstrip("\n") == LOG_HEADING:
+            continue
+        if not seen_heading:
+            continue
+        if current is not None:
+            current.append(line)
+    if current is not None:
+        entries.append(current)
+    return ["".join(e).rstrip("\n") + "\n" for e in entries]
+
+
+def read_last_log(path: Path, count: int) -> str:
+    text = path.read_text()
+    _, _, log = split_file(text)
+    if not log:
+        return ""
+    entries = split_log_entries(log)
+    if count <= 0:
+        return ""
+    tail = entries[-count:]
+    return "\n".join(tail)
+
+
 def append_log(path: Path, entry: str) -> None:
     text = path.read_text()
     entry = entry.rstrip("\n") + "\n"
@@ -150,6 +193,21 @@ def main(argv: list[str]) -> int:
             print(f"journal-ops: no such file: {path}", file=sys.stderr)
             return 1
         append_log(path, sys.stdin.read())
+        return 0
+
+    if cmd == "last-log":
+        if len(argv) < 4:
+            print("usage: journal-ops.py last-log <path> <count>", file=sys.stderr)
+            return 2
+        if not path.exists():
+            print(f"journal-ops: no such file: {path}", file=sys.stderr)
+            return 1
+        try:
+            count = int(argv[3])
+        except ValueError:
+            print(f"journal-ops: count must be an integer: {argv[3]}", file=sys.stderr)
+            return 2
+        sys.stdout.write(read_last_log(path, count))
         return 0
 
     print(f"journal-ops: unknown subcommand: {cmd}", file=sys.stderr)
