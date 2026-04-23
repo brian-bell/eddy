@@ -66,7 +66,10 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 - YAML frontmatter on every note
 - `[[wikilinks]]` between notes, `#tags` in body
 - Every skill appends to the daily log
-- Work streams are **never** auto-created — always confirm
+- Work streams are **never** auto-created or auto-modified — always confirm
+
+### Auto-capture (Claude Code only)
+Each coding task folder gets a `JOURNAL.md` plus `SessionStart` / `SessionEnd` hooks installed by `/new-task`. The `SessionEnd` hook appends a `[session]` entry with a git delta (and, by default, a 2–3 sentence LLM summary) to the journal. The `SessionStart` hook replays the journal state + filtered todos into the agent's first turn so you pick up where you left off. `/checkpoint` lets you mark state between sessions. See [`docs/migrations/task-journal.md`](docs/migrations/task-journal.md) to adopt it in existing task folders.
 
 ### Key Files
 - `config.md` — GitHub user, prefs, integrations
@@ -74,4 +77,4 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 - `ARCHITECTURE.md` — System overview
 
 ### Upgrading an existing vault
-See [docs/migrations/](docs/migrations/) for guides covering schema changes. Most recent: [running-todos](docs/migrations/running-todos.md) — single running todo list + work streams as doc-of-docs.
+See [docs/migrations/](docs/migrations/) for guides covering schema changes. Most recent: [task-journal](docs/migrations/task-journal.md) — per-task `JOURNAL.md` + `SessionStart`/`SessionEnd` hooks + `/checkpoint`.
