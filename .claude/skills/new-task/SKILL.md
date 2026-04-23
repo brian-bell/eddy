@@ -74,6 +74,7 @@ Then match the task to a work stream:
    <List of cloned repos with their roles>
 
    ## References
+   - Task journal: `./JOURNAL.md` (per-task log; `/checkpoint` rewrites the state header and appends log entries)
    - Work stream: `<workflow-repo>/notes/workstreams/<stream>.md`
    - Running todos: `<workflow-repo>/notes/todos/running.md` (filter by `workstream: <stream>`)
    - Daily log: `<workflow-repo>/notes/daily/`
@@ -86,6 +87,8 @@ Then match the task to a work stream:
    ```
 
    If `AGENTS.md` already exists and is not already that symlink, ask the user before replacing it.
+
+7. Create `<dev-dir>/<task-name>/JOURNAL.md` from `notes/templates/journal.md`, substituting `{{task}}` with the kebab-case task name, `{{workstream}}` with the matched work stream name, and `{{created}}` with today's date (`YYYY-MM-DD`). The rest of the template (state header, empty `## Log`) is written through unchanged. The journal stays local to the task folder — it is not copied into the vault. If `JOURNAL.md` already exists in the folder, leave it alone rather than overwriting.
 
 #### 4b. Non-Coding Mode
 
@@ -129,7 +132,7 @@ Create the `## Tasks` section just above `## Notes` if it's missing. No `ended:`
 
 Tell the user:
 
-- **Coding mode:** task folder location, what was cloned, the `CLAUDE.md` + `AGENTS.md` symlink, the work stream `## Tasks` bullet appended (quote the line), the daily log entry, and how to resume (`cd <folder>` and launch Claude Code or Codex).
+- **Coding mode:** task folder location, what was cloned, the `CLAUDE.md` + `AGENTS.md` symlink, the scaffolded `JOURNAL.md`, the work stream `## Tasks` bullet appended (quote the line), the daily log entry, and how to resume (`cd <folder>` and launch Claude Code or Codex).
 - **Non-coding mode:** the captured task name, work stream, and output type; the work stream `## Tasks` bullet (quote the line); the daily log entry; and a reminder that the output file wasn't pre-created — the user is expected to produce it themselves.
 
 ## Important Rules
