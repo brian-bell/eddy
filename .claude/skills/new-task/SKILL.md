@@ -90,6 +90,27 @@ Then match the task to a work stream:
 
 7. Create `<dev-dir>/<task-name>/JOURNAL.md` from `notes/templates/journal.md`, substituting `{{task}}` with the kebab-case task name, `{{workstream}}` with the matched work stream name, and `{{created}}` with today's date (`YYYY-MM-DD`). The rest of the template (state header, empty `## Log`) is written through unchanged. The journal stays local to the task folder — it is not copied into the vault. If `JOURNAL.md` already exists in the folder, leave it alone rather than overwriting.
 
+8. Install the SessionEnd hook into the task folder's `.claude/settings.json` so each Claude Code session auto-appends a `[session]` log entry to `JOURNAL.md` on exit. Write (merging with any existing file):
+
+   ```json
+   {
+     "hooks": {
+       "SessionEnd": [
+         {
+           "hooks": [
+             {
+               "type": "command",
+               "command": "<absolute-workflow-repo>/.claude/hooks/session-end.sh"
+             }
+           ]
+         }
+       ]
+     }
+   }
+   ```
+
+   Substitute `<absolute-workflow-repo>` with the same absolute path used in the task `CLAUDE.md`'s Workflow Repo section. If `.claude/settings.json` already exists in the folder, merge the `hooks.SessionEnd` entry in rather than overwriting the file. If it already has a SessionEnd hook pointing elsewhere, ask the user before replacing.
+
 #### 4b. Non-Coding Mode
 
 The user has indicated this isn't a coding task. No filesystem scaffolding — just capture what kind of output is expected and an identifier for the task.
@@ -132,7 +153,7 @@ Create the `## Tasks` section just above `## Notes` if it's missing. No `ended:`
 
 Tell the user:
 
-- **Coding mode:** task folder location, what was cloned, the `CLAUDE.md` + `AGENTS.md` symlink, the scaffolded `JOURNAL.md`, the work stream `## Tasks` bullet appended (quote the line), the daily log entry, and how to resume (`cd <folder>` and launch Claude Code or Codex).
+- **Coding mode:** task folder location, what was cloned, the `CLAUDE.md` + `AGENTS.md` symlink, the scaffolded `JOURNAL.md`, the `.claude/settings.json` with the `SessionEnd` hook wired up, the work stream `## Tasks` bullet appended (quote the line), the daily log entry, and how to resume (`cd <folder>` and launch Claude Code or Codex).
 - **Non-coding mode:** the captured task name, work stream, and output type; the work stream `## Tasks` bullet (quote the line); the daily log entry; and a reminder that the output file wasn't pre-created — the user is expected to produce it themselves.
 
 ## Important Rules
