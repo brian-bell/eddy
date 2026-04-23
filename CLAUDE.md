@@ -59,3 +59,19 @@ See also:
 - `.claude/skills/workstream-format.md` — Work stream conventions
 - `.claude/skills/ticket-format.md` — Unified ticket schema (Jira, Linear)
 - `.claude/skills/config-format.md` — How to parse config.md
+
+## Task Journal
+
+Each coding task folder scaffolded by `/new-task` contains a `JOURNAL.md`. Claude Code `SessionStart` and `SessionEnd` hooks (installed by `/new-task` into the task folder's `.claude/settings.json`) auto-resume and auto-capture work across sessions. `/checkpoint` lets the agent (or user) mark state explicitly mid-session.
+
+The hook scripts and the deep helpers live under `.claude/hooks/`:
+
+| File | Role |
+|------|------|
+| `journal-ops.py` | Module A — read/write state region, append/read log entries |
+| `git-delta.py` | Module B — collect commits/files across child repos, render markdown |
+| `session-start.sh` | Emits resume brief (state + last 3 log entries + filtered todos) |
+| `session-end.sh` | Appends `[session]` entry with git delta + optional LLM summary |
+| `summarize-transcript.sh` | Module C — wraps `claude -p` for the session summary |
+
+Bats tests for Modules A and B + hook integration live in `tests/`. Install with `brew install bats-core` and run `bats tests/`.
