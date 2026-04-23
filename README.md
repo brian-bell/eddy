@@ -28,7 +28,7 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 - **`/whats-next`** — Prioritized next actions across all sources
 
 ### Capture
-- **`/new-task`** — Start a task against a work stream — scaffolds a coding folder (clones repos + CLAUDE.md/AGENTS.md) by default; non-coding captures the output type
+- **`/new-task`** — Start a task against a work stream — scaffolds a coding folder (clones repos + CLAUDE.md/AGENTS.md + JOURNAL.md) by default; non-coding captures the output type
 - **`/ingest`** — Drop Slack/email/meeting notes into the vault
 - **`/idea`** — Quick idea capture with auto-metadata
 
@@ -43,6 +43,7 @@ Powered by [Claude Code](https://docs.anthropic.com/en/docs/claude-code) or [Cod
 - **`/linear`** — Query/create/update via linearis/MCP
 
 ### Reflect & Maintain
+- **`/checkpoint`** — Capture task state in `JOURNAL.md`; `--promote` also drops a note into the work stream
 - **`/recap`** — Daily or weekly summary
 - **`/architecture`** — Interview-driven ARCHITECTURE.md
 - **`/docs`** — Refresh CLAUDE.md + README.md

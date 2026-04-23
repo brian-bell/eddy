@@ -58,6 +58,7 @@ Use these prefixes in brackets:
 | `architecture` | /architecture |
 | `idea` | /idea |
 | `setup` | /eddy-setup |
+| `checkpoint` | /checkpoint |
 
 ## Creating the Daily Log
 
