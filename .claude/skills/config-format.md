@@ -19,6 +19,9 @@ Read `config.md` and extract values from the markdown list items. Each setting i
 - **Dev Directory** — Base directory for task folders (default: `~/dev`)
 - **Default Branch** — Default branch name (default: `main`)
 
+### Task Journal
+- **Session Summary** — `on` (default) or `off`. When `on`, the `SessionEnd` hook asks `claude -p` for a 2–3 sentence summary of the session transcript and writes it into each `[session]` journal entry alongside the git delta. When `off`, only the git delta is written. Consumed by `.claude/hooks/session-end.sh`.
+
 ### Optional Integrations
 
 #### Jira

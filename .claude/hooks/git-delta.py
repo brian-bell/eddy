@@ -157,7 +157,7 @@ def collect(task_folder: Path) -> dict:
     }
 
 
-def render(data: dict) -> str:
+def render(data: dict, summary: str = "") -> str:
     ts = data.get("generated_at", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
     repos = data.get("repos", [])
 
@@ -170,6 +170,17 @@ def render(data: dict) -> str:
         reason = f"session ended — {total_commits} commit(s), {total_files} file(s) changed"
 
     lines = [f"### [session] {ts} — {reason}", ""]
+
+    summary = (summary or "").strip()
+    if summary:
+        lines.append("**Session summary**")
+        lines.append("")
+        lines.append(summary)
+        lines.append("")
+        if repos:
+            lines.append("**Repo changes**")
+            lines.append("")
+
     if not repos:
         lines.append("_No child repositories detected._")
         return "\n".join(lines) + "\n"
@@ -220,12 +231,25 @@ def main(argv: list[str]) -> int:
         return 0
 
     if cmd == "render":
+        summary = ""
+        # Parse optional --summary-file <path>.
+        rest = argv[2:]
+        i = 0
+        while i < len(rest):
+            if rest[i] == "--summary-file" and i + 1 < len(rest):
+                summary_path = Path(rest[i + 1])
+                if summary_path.is_file():
+                    summary = summary_path.read_text()
+                i += 2
+            else:
+                print(f"git-delta: unexpected arg: {rest[i]}", file=sys.stderr)
+                return 2
         try:
             data = json.load(sys.stdin)
         except json.JSONDecodeError as exc:
             print(f"git-delta: invalid JSON on stdin: {exc}", file=sys.stderr)
             return 1
-        sys.stdout.write(render(data))
+        sys.stdout.write(render(data, summary=summary))
         return 0
 
     print(f"git-delta: unknown subcommand: {cmd}", file=sys.stderr)
